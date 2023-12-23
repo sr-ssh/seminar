@@ -2,9 +2,11 @@ import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { styled } from "@mui/material";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
+import PaginationRounded from "../Pagination";
 
 const DataGridStyle = styled(DataGrid)(({ theme }) => ({
   border: "none",
+  gap: 24,
   "& .MuiDataGrid-main": {
     gap: 24,
     backgroundColor: theme.palette.goku.light,
@@ -33,6 +35,9 @@ const DataGridStyle = styled(DataGrid)(({ theme }) => ({
   "& .MuiDataGrid-withBorderColor": { border: "none" },
   "& .MuiDataGrid-virtualScrollerContent": {
     height: "600px !important",
+  },
+  "& .MuiDataGrid-footerContainer": {
+    justifyContent: "center",
   },
 }));
 
@@ -147,6 +152,9 @@ export function CustomDataGrid() {
               pageSize: 9,
             },
           },
+        }}
+        slots={{
+          pagination: PaginationRounded,
         }}
         pageSizeOptions={[5]}
         disableRowSelectionOnClick
