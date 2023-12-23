@@ -1,11 +1,13 @@
 import "./App.css";
+import "./styles/fonts.css";
+import "./styles/reset.css";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
-import { FormControl, ThemeProvider } from "@mui/material";
-import { theme } from "./styles/theme";
+import { ThemeProvider } from "@mui/material";
 import { Layout } from "./components/Layout";
+import { theme } from "./utils/theme";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -17,7 +19,6 @@ export const App = () => {
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
         <div className="App">
-          <FormControl variant="standard" />
           <Layout />
         </div>
       </ThemeProvider>
