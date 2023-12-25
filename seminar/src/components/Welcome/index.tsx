@@ -1,5 +1,10 @@
 import { Box, Button, Typography, styled } from "@mui/material";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
+import { useNavigate } from "react-router-dom";
+
+interface Props {
+  isSignUp: boolean;
+}
 
 const StyledBox = styled(Box)(({ theme }) => ({
   flex: 4.3,
@@ -15,7 +20,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
   color: theme.palette.gohan.light,
 }));
 
-export const WelcomeImage = () => {
+export const WelcomeImage: React.FC<Props> = ({ isSignUp }) => {
+  const navigate = useNavigate();
   return (
     <StyledBox>
       <Typography
@@ -28,11 +34,26 @@ export const WelcomeImage = () => {
       </Typography>
       <Box display="flex" flexDirection={"column"} gap={3}>
         <Typography variant="lg">
-          <Localizer localeKey="SIGNUP_HAVE_YOU_SIGNED" />
+          <Localizer
+            localeKey={
+              isSignUp ? "SIGNUP_HAVE_YOU_SIGNED" : "LOGIN_HAVE_YOU_SIGNED"
+            }
+          />
         </Typography>
-        <Button variant="contained" size="large" fullWidth>
+        <Button
+          variant="contained"
+          size="large"
+          fullWidth
+          onClick={() => {
+            isSignUp ? navigate("/login") : navigate("/auth");
+          }}
+        >
           <Typography variant="md">
-            <Localizer localeKey="SIGNUP_LOGIN_BUTTON" />
+            <Localizer
+              localeKey={
+                isSignUp ? "SIGNUP_LOGIN_BUTTON" : "LOGIN_LOGIN_BUTTON"
+              }
+            />
           </Typography>
         </Button>
       </Box>

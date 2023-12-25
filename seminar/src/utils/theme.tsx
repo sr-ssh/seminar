@@ -33,6 +33,7 @@ declare module "@mui/material/styles" {
     xl: React.CSSProperties;
     lg: React.CSSProperties;
     md: React.CSSProperties;
+    _md: React.CSSProperties;
     sm: React.CSSProperties;
     xs: React.CSSProperties;
   }
@@ -42,6 +43,7 @@ declare module "@mui/material/styles" {
     xl?: React.CSSProperties;
     lg?: React.CSSProperties;
     md?: React.CSSProperties;
+    _md?: React.CSSProperties;
     sm?: React.CSSProperties;
     xs?: React.CSSProperties;
   }
@@ -52,6 +54,7 @@ declare module "@mui/material/Typography" {
     _3xl: true;
     xl: true;
     lg: true;
+    _md: true;
     md: true;
     sm: true;
     xs: true;
@@ -80,6 +83,11 @@ export const theme = createTheme({
     md: {
       fontSize: "16px",
       fontWeight: 400,
+      lineHeight: "140%" /* 44.8px */,
+    },
+    _md: {
+      fontSize: "16px",
+      fontWeight: 600,
       lineHeight: "140%" /* 44.8px */,
     },
     sm: {

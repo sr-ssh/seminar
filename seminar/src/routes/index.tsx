@@ -1,9 +1,10 @@
 import { Container } from "@mui/material";
 import EmailOTP from "../pages/EmailOTP";
 import SignUp from "../pages/Signup";
-import { Login } from "../pages/login";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CustomDataGrid } from "../components/DataGrid";
+import Login from "../pages/Login";
 
 export const Routing = () => {
   return (

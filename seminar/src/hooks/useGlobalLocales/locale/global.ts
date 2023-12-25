@@ -1,6 +1,7 @@
 import { GlobalLocalesType } from "../GlobalLocalesType";
 
 export const globalLocales: GlobalLocalesType = {
+  SEMINAR: "سامانه سمینار",
   WELCOME_TO_SEMINAR: "به سامانه سمینار خوش آمدید",
   SIGNUP_HAVE_YOU_SIGNED: "آیا در سامانه عضو هستید؟",
   SIGNUP_LOGIN_BUTTON: "ورود",
@@ -19,6 +20,16 @@ export const globalLocales: GlobalLocalesType = {
   SIGNUP_SUBMIT_BUTTON: "ثبت نام",
   SIGNUP_SHOW_PASSWORD: "نمایش",
 
+  LOGIN_TITLE: "ورود به سامانه",
+  LOGIN_EMAIL_ADDRESS: "آدرس ایمیل",
+  LOGIN_LOGIN_BUTTON: "ثبت نام",
+  LOGIN_HAVE_YOU_SIGNED: "آیا هنوز در سامانه عضو نشده اید؟ ",
+  LOGIN_PASSWORD: "رمز عبور",
+  LOGIN_SHOW_PASSWORD: "نمایش",
+  LOGIN: "ورود",
+  LOGIN_FORGET_PASS: "فراموشی رمز عبور",
+  LOGIN_EMAIL_ADDRESS_PLACEHOLDER: "Hossein@ut.ac.ir",
+
   OTP_TITLE: "ورود کد دریافتی در ایمیل",
   OTP_ENTER_CODE: "لطفا کد دریافتی در ایمیل خود را در سامانه وارد کنید",
   OTP_LOGIN: "ثبت نام",
@@ -27,5 +38,10 @@ export const globalLocales: GlobalLocalesType = {
   DATA_GRID_TITLE_COLUMN: "عنوان دفاع",
   DATA_GRID_STUDENT_COLUMN: "دانشجو",
   DATA_GRID_SUPERVISOR_COLUMN: "استاد راهنما",
-  DATA_GRID_DATE_COLUMN: "تاریخ"
+  DATA_GRID_DATE_COLUMN: "تاریخ",
+
+  TEACHER_MENU_STUDENTS: "دانشجویان ",
+  TEACHER_MENU_CLASSES: "کلاسها",
+  TEACHER_MENU_GRADUATE: "نمایندگی تحصیلات تکمیلی",
+  TEACHER_MENU_REQUESTS: "درخواست‌ها",
 };

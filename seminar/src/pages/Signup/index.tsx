@@ -19,7 +19,7 @@ const StyledBox = styled(Box)({
 const SignUp = () => {
   return (
     <ContainerStyle>
-      <WelcomeImage />
+      <WelcomeImage isSignUp />
       <StyledBox>
         <SignUpForm />
       </StyledBox>
