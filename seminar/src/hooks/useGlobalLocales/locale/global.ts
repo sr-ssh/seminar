@@ -44,4 +44,12 @@ export const globalLocales: GlobalLocalesType = {
   TEACHER_MENU_CLASSES: "کلاسها",
   TEACHER_MENU_GRADUATE: "نمایندگی تحصیلات تکمیلی",
   TEACHER_MENU_REQUESTS: "درخواست‌ها",
+
+  THESIS_SIGNUP: "ثبت نام",
+  THESIS_REMAIN_CAPACITY: "ظرفیت باقی مانده:",
+  THESIS_REMAIN_UNIT: "نفر",
+  THESIS_DOWNLOAD_FORM_BUTTON: "دانلود فرم حضور",
+  THESIS_UPLOAD_FORM_BUTTON: "بارگذاری فرم",
+  THESIS_RESIGN_BUTTON: "انصراف از شرکت",
+  THESIS_UPLOADED_DOCS: "مدارک بارگذاری شده:"
 };

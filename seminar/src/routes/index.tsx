@@ -5,6 +5,7 @@ import SignUp from "../pages/Signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CustomDataGrid } from "../components/DataGrid";
 import Login from "../pages/Login";
+import ThesisDetail from "../pages/ThesisDetail";
 
 export const Routing = () => {
   return (
@@ -20,7 +21,7 @@ export const Routing = () => {
             <Container
               sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}
             >
-              <CustomDataGrid />
+              <ThesisDetail />
             </Container>
           }
         />
