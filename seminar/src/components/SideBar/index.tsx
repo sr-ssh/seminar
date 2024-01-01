@@ -2,9 +2,11 @@ import { Box, Button, Typography, styled } from "@mui/material";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { MenuItem } from "../../hooks/useGlobalLocales/GlobalLocalesType";
 import { useNavigate } from "react-router-dom";
+import { ReactNode } from "react";
 
 interface Props {
   menuItems: MenuItem[];
+  children: ReactNode;
 }
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -35,18 +37,33 @@ const Menu = styled(Button)(({ theme }) => ({
   },
 }));
 
-export const SideBar: React.FC<Props> = ({ menuItems }) => {
+export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
   const navigate = useNavigate();
   return (
-    <StyledBox>
-      <Typography variant="_md" marginBlockEnd={4}>
-        <Localizer localeKey="SEMINAR" />
-      </Typography>
-      {menuItems.map((menu, index) => (
-        <Menu key={index} onClick={() => navigate(menu.link)}>
-          {menu.title}
-        </Menu>
-      ))}
-    </StyledBox>
+    <Box sx={{ display: "flex", width: "auto" }}>
+      <StyledBox>
+        <Typography variant="_md" marginBlockEnd={4}>
+          <Localizer localeKey="SEMINAR" />
+        </Typography>
+        {menuItems.map((menu, index) => (
+          <Menu key={index} onClick={() => navigate(menu.link)}>
+            {menu.title}
+          </Menu>
+        ))}
+      </StyledBox>
+      <Box
+        sx={{
+          left: "364px",
+          flexGrow: 1,
+          display: "flex",
+          position: "absolute",
+          padding: "70px 50px",
+          width: "-webkit-fill-available",
+          backgroundColor: "goku.light",
+        }}
+      >
+        {children}
+      </Box>
+    </Box>
   );
 };
