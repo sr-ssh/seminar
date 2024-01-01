@@ -1,4 +1,9 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Avatar, Box, Button, Typography, styled } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import * as React from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   position: "fixed",
@@ -22,16 +27,33 @@ const StyledBox = styled(Box)(({ theme }) => ({
 const StyledButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.goku.light,
   height: "fit-content",
+  borderRadius: "8px",
 }));
 
 export const Header: React.FC = () => {
   return (
     <StyledBox>
-      <StyledButton>
-        {/* <Icon /> */}
-        <Typography variant="_md">name</Typography>
-        {/* //Image */}
-      </StyledButton>
+      <PopupState variant="popover" popupId="demo-popup-menu">
+        {(popupState) => (
+          <React.Fragment>
+            <StyledButton sx={{ px: 2, py: 1 }} {...bindTrigger(popupState)}>
+              <ExpandMoreIcon />
+              <Typography marginX={2} variant="sm">
+                name
+              </Typography>
+              <Avatar
+                sizes="20"
+                src="https://www.google.com/logos/doodles/2024/new-years-day-2024-6753651837110174-la202124.gif"
+              />
+            </StyledButton>
+            <Menu {...bindMenu(popupState)}>
+              <MenuItem onClick={popupState.close}>Profile</MenuItem>
+              <MenuItem onClick={popupState.close}>My account</MenuItem>
+              <MenuItem onClick={popupState.close}>Logout</MenuItem>
+            </Menu>
+          </React.Fragment>
+        )}
+      </PopupState>
     </StyledBox>
   );
 };
