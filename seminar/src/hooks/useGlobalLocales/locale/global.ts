@@ -44,4 +44,10 @@ export const globalLocales: GlobalLocalesType = {
   TEACHER_MENU_CLASSES: "کلاسها",
   TEACHER_MENU_GRADUATE: "نمایندگی تحصیلات تکمیلی",
   TEACHER_MENU_REQUESTS: "درخواست‌ها",
+
+  RECORDED_SESSIONS: "جلسات ثبت نام شده",
+  STUDENT_DETAILS_SID: "شماره دانشجویی:",
+  STUDENT_DETAILS_SUPERVISOR: "استاد راهنما:",
+  STUDENT_DETAILS_FIELD: "گرایش:",
+  STUDENT_DETAILS_EMAIL: 'پست الکترونیکی:'
 };

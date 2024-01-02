@@ -142,7 +142,7 @@ const rows = [
 
 export function CustomDataGrid() {
   return (
-    <Box sx={{ height: "100%", width: "100%" }}>
+    <Box sx={{ height: "auto", width: "100%" }}>
       <DataGridStyle
         rows={rows}
         columns={columns}
