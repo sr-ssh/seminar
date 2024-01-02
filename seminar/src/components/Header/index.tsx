@@ -37,12 +37,15 @@ export const Header: React.FC = () => {
         {(popupState) => (
           <React.Fragment>
             <StyledButton sx={{ px: 2, py: 1 }} {...bindTrigger(popupState)}>
-              <ExpandMoreIcon />
-              <Typography marginX={2} variant="sm">
+              <ExpandMoreIcon
+                sx={{ color: "trunks.light" }}
+                fontSize={"small"}
+              />
+              <Typography marginX={2} variant="xs" sx={{ color: "popo.light" }}>
                 name
               </Typography>
               <Avatar
-                sizes="20"
+                sx={{ width: "32px", height: "32px" }}
                 src="https://www.google.com/logos/doodles/2024/new-years-day-2024-6753651837110174-la202124.gif"
               />
             </StyledButton>
