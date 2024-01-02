@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 import EmailOTP from "../pages/EmailOTP";
 import SignUp from "../pages/Signup";
 
@@ -18,11 +18,9 @@ export const Routing = () => {
         <Route
           path="/"
           element={
-            <Container
-              sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}
-            >
+            <Box sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}>
               <ThesisDetail />
-            </Container>
+            </Box>
           }
         />
       </Routes>
