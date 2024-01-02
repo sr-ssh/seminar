@@ -2,12 +2,14 @@ import styled from "@emotion/styled";
 import { Box, Button, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { Localizer } from "../../../../hooks/useGlobalLocales/Localizer";
+import ThesisModal from "../Modal";
 
 const FileInput = styled.input({ display: "none" });
 
 const ThesisForm = () => {
   const [hasSignUp, setHasSignUp] = useState(false);
   const [file, setFile] = useState<File>();
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUpload = () => {
@@ -70,6 +72,7 @@ const ThesisForm = () => {
               size="large"
               color="error"
               sx={{ width: 265 }}
+              onClick={() => setOpenModal(true)}
             >
               <Localizer localeKey="THESIS_RESIGN_BUTTON" />
             </Button>
@@ -93,6 +96,7 @@ const ThesisForm = () => {
           </Typography>
         </Box>
       )}
+      <ThesisModal open={openModal} setOpen={setOpenModal} />
     </>
   );
 };

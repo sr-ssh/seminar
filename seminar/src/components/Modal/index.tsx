@@ -15,6 +15,7 @@ export const ModalComponent: React.FC<ModalComponentProps> = ({
 }) => {
   return (
     <Modal
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       open={open}
       onClose={onClose}
       aria-labelledby="modal-title"
@@ -26,3 +27,5 @@ export const ModalComponent: React.FC<ModalComponentProps> = ({
     </Modal>
   );
 };
+
+export {};

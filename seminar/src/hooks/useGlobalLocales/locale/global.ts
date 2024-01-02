@@ -51,5 +51,10 @@ export const globalLocales: GlobalLocalesType = {
   THESIS_DOWNLOAD_FORM_BUTTON: "دانلود فرم حضور",
   THESIS_UPLOAD_FORM_BUTTON: "بارگذاری فرم",
   THESIS_RESIGN_BUTTON: "انصراف از شرکت",
-  THESIS_UPLOADED_DOCS: "مدارک بارگذاری شده:"
+  THESIS_UPLOADED_DOCS: "مدارک بارگذاری شده:",
+  THESIS_MODAL_RESIGN: "انصراف از شرکت در جلسه",
+  THESIS_MODAL_DESC_1: "آیا از انصراف دادن از شرکت در این جلسه اطمینان دارید؟",
+  THESIS_MODAL_DESC_2: "ممکن است به علت تکمیل شدن ظرفیت نتوانید دوباره در آن شرکت کنید",
+  THESIS_MODAL_YES: "بله",
+  THESIS_MODAL_NO: "خیر"
 };
