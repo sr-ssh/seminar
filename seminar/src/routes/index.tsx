@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Box } from "@mui/material";
 import EmailOTP from "../pages/EmailOTP";
 import SignUp from "../pages/Signup";
 
@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CustomDataGrid } from "../components/DataGrid";
 import Login from "../pages/Login";
 import StudentDetails from "../pages/StudentDetails";
+import ThesisDetail from "../pages/ThesisDetail";
 
 export const Routing = () => {
   return (
@@ -19,11 +20,9 @@ export const Routing = () => {
         <Route
           path="/"
           element={
-            <Container
-              sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}
-            >
-              <CustomDataGrid />
-            </Container>
+            <Box sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}>
+              <ThesisDetail />
+            </Box>
           }
         />
       </Routes>

@@ -44,4 +44,17 @@ export const globalLocales: GlobalLocalesType = {
   TEACHER_MENU_CLASSES: "کلاسها",
   TEACHER_MENU_GRADUATE: "نمایندگی تحصیلات تکمیلی",
   TEACHER_MENU_REQUESTS: "درخواست‌ها",
+
+  THESIS_SIGNUP: "ثبت نام",
+  THESIS_REMAIN_CAPACITY: "ظرفیت باقی مانده:",
+  THESIS_REMAIN_UNIT: "نفر",
+  THESIS_DOWNLOAD_FORM_BUTTON: "دانلود فرم حضور",
+  THESIS_UPLOAD_FORM_BUTTON: "بارگذاری فرم",
+  THESIS_RESIGN_BUTTON: "انصراف از شرکت",
+  THESIS_UPLOADED_DOCS: "مدارک بارگذاری شده:",
+  THESIS_MODAL_RESIGN: "انصراف از شرکت در جلسه",
+  THESIS_MODAL_DESC_1: "آیا از انصراف دادن از شرکت در این جلسه اطمینان دارید؟",
+  THESIS_MODAL_DESC_2: "ممکن است به علت تکمیل شدن ظرفیت نتوانید دوباره در آن شرکت کنید",
+  THESIS_MODAL_YES: "بله",
+  THESIS_MODAL_NO: "خیر"
 };
