@@ -1,0 +1,1 @@
+export const BASE_URL = 'https://api.seminar.arkamond.com/api/'

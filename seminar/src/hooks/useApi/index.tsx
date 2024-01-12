@@ -1,8 +1,11 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import axios, { AxiosRequestConfig } from "axios";
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { userSelectors } from "../../store/user/selector";
+import { userClear } from "../../store/user";
 
 interface UseApiReturnType {
   loading: boolean;
@@ -13,15 +16,15 @@ interface ApiCallOptions {
   url: string;
   query?: Record<string, any>;
   method?: string;
-  successCallback?: (response: AxiosResponse) => void;
+  successCallback?: (response: any) => void;
   failedCallback?: (error: any) => void;
 }
 
 const UseApi = (): UseApiReturnType => {
   const [loading, setLoading] = useState<boolean>(false);
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const token = useSelector(userSelectors.token);
+  const token = useSelector(userSelectors.token);
 
   const apiCall = ({
     url,
@@ -34,18 +37,18 @@ const UseApi = (): UseApiReturnType => {
     const params = query ?? {};
     const axiosOptions: AxiosRequestConfig = {
       url,
-      method: method ?? 'get',
+      method: method ?? "get",
     };
-    if (method === 'post' || method === 'delete') {
+    if (method === "post" || method === "delete") {
       axiosOptions.data = params;
     } else {
       axiosOptions.params = params;
     }
-    // if (token && token.token) {
-    //     axiosOptions.headers = {
-    //         Authorization: token.token
-    //     }
-    // }
+    if (token && token.token) {
+      axiosOptions.headers = {
+        Authorization: token.token,
+      };
+    }
     axios(axiosOptions)
       .then(function (response) {
         // handle success
@@ -54,8 +57,8 @@ const UseApi = (): UseApiReturnType => {
       .catch(function (error) {
         // handle error
         if (error?.response?.status === 401) {
-          navigate('/login');
-          // dispatch(userClear())
+          navigate("/login");
+          dispatch(userClear());
         }
         if (error?.response?.data?.data) {
           toast(error?.response?.data?.data);

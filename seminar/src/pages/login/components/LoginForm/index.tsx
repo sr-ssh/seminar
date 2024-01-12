@@ -12,6 +12,12 @@ import { TextInput } from "../../../../components/TextInput";
 import { convertLocale } from "../../../../hooks/useGlobalLocales/useGlobalLocales";
 import { useForm } from "../../../../hooks/useForm/useForm";
 import { useNavigate } from "react-router-dom";
+import UseApi from "../../../../hooks/useApi";
+import { useDispatch, useSelector } from "react-redux";
+import { userSelectors } from "../../../../store/user/selector";
+import { useEffect } from "react";
+import { setUserInfo } from "../../../../store/user";
+import { setToken } from "../../../../store/user/token";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -36,7 +42,57 @@ const Submit = styled("div")({
 });
 
 const LoginForm = () => {
+  const { apiCall } = UseApi();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector(userSelectors.user);
+  const token = useSelector(userSelectors.token);
+
+  useEffect(() => {
+    if (token) {
+      getUserData();
+    }
+  }, [token]);
+
+  const onGetUserDataSuccess = (res: unknown) => {
+    // dispatch(setUserInfo(res.data.data));
+    console.log(res);
+
+    navigate("/");
+  };
+
+  const getUserData = () => {
+    const query = {};
+    apiCall({
+      url: "https://localhost:5432/api/users/loggedInUser",
+      query,
+      method: "get",
+      successCallback: onGetUserDataSuccess,
+    });
+  };
+
+  const onLoginSuccess = (res: { access: string }) => {
+    dispatch(
+      setToken({
+        token: res.access,
+      }),
+    );
+  };
+
+  const loginApiCall = () => {
+    const query = {
+      email: "Negar@ut.ac.ir",
+      password: "Negar@1234",
+    };
+
+    apiCall({
+      url: "https://api.seminar.arkamond.com/api/account/auth/login/",
+      query,
+      method: "post",
+      successCallback: onLoginSuccess,
+    });
+  };
+
   const { submitHandler, onChangeHandler } = useForm();
 
   const handleChange = (
@@ -90,7 +146,7 @@ const LoginForm = () => {
           variant="contained"
           size="large"
           fullWidth
-          onClick={submitHandler}
+          onClick={loginApiCall}
         >
           <Typography variant="sm">
             <Localizer localeKey="LOGIN" />

@@ -8,6 +8,9 @@ import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material";
 import { Layout } from "./components/Layout";
 import { theme } from "./utils/theme";
+import { Persistor, Store } from "./store/store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const cacheRtl = createCache({
   key: "muirtl",
@@ -17,11 +20,15 @@ const cacheRtl = createCache({
 export const App = () => {
   return (
     <CacheProvider value={cacheRtl}>
-      <ThemeProvider theme={theme}>
-        <div className="App">
-          <Layout />
-        </div>
-      </ThemeProvider>
+      <Provider store={Store}>
+        <PersistGate loading={null} persistor={Persistor}>
+          <ThemeProvider theme={theme}>
+            <div className="App">
+              <Layout />
+            </div>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
     </CacheProvider>
   );
 };
