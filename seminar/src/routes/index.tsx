@@ -21,7 +21,7 @@ export const Routing = () => {
           path="/"
           element={
             <Box sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}>
-              <ThesisDetail />
+              <CustomDataGrid />
             </Box>
           }
         />

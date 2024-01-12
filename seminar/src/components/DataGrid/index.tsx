@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { styled } from "@mui/material";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 import PaginationRounded from "../Pagination";
+import DataGridSkeleton from "./Skeleton";
 
 const DataGridStyle = styled(DataGrid)(({ theme }) => ({
   border: "none",
@@ -155,10 +156,12 @@ export function CustomDataGrid() {
         }}
         slots={{
           pagination: PaginationRounded,
+          loadingOverlay: DataGridSkeleton,
         }}
         pageSizeOptions={[5]}
         disableRowSelectionOnClick
         rowHeight={56}
+        loading={true}
       />
     </Box>
   );
