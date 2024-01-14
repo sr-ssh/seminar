@@ -1,24 +1,27 @@
 import {
   Box,
   Button,
+  ButtonBase,
   FormControl,
   InputAdornment,
   Typography,
   styled,
 } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { Localizer } from "../../../../hooks/useGlobalLocales/Localizer";
 import { Label } from "../../../../components/Label";
 import { TextInput } from "../../../../components/TextInput";
 import { convertLocale } from "../../../../hooks/useGlobalLocales/useGlobalLocales";
-import { useForm } from "../../../../hooks/useForm/useForm";
 import { useNavigate } from "react-router-dom";
 import UseApi from "../../../../hooks/useApi";
 import { useDispatch, useSelector } from "react-redux";
 import { userSelectors } from "../../../../store/user/selector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setUserInfo } from "../../../../store/user";
 import { setToken } from "../../../../store/user/token";
 
+// email: "Negar@ut.ac.ir",
+// password: "Negar@1234",
 const ContainerStyle = styled(Box)({
   display: "flex",
   flexDirection: "column",
@@ -48,41 +51,55 @@ const LoginForm = () => {
   const user = useSelector(userSelectors.user);
   const token = useSelector(userSelectors.token);
 
+  type FormValues = {
+    email: string;
+    password: string;
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const [passTextFieldType, setPassTextFieldType] = useState("password");
+
   useEffect(() => {
     if (token) {
       getUserData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  const onGetUserDataSuccess = (res: unknown) => {
+  const onGetUserDataSuccess = (res: any) => {
     // dispatch(setUserInfo(res.data.data));
     console.log(res);
-
     navigate("/");
   };
 
   const getUserData = () => {
     const query = {};
     apiCall({
-      url: "https://localhost:5432/api/users/loggedInUser",
+      url: "https://api.seminar.arkamond.com/api/account/user/me/",
       query,
       method: "get",
       successCallback: onGetUserDataSuccess,
     });
   };
 
-  const onLoginSuccess = (res: { access: string }) => {
+  const onLoginSuccess = (res: any) => {
     dispatch(
       setToken({
-        token: res.access,
+        accessToken: res.data.access,
+        refreshToken: res.data.refresh,
       }),
     );
   };
 
-  const loginApiCall = () => {
+  const loginApiCall = (info: FormValues) => {
     const query = {
-      email: "Negar@ut.ac.ir",
-      password: "Negar@1234",
+      email: info.email,
+      password: info.password,
     };
 
     apiCall({
@@ -93,70 +110,71 @@ const LoginForm = () => {
     });
   };
 
-  const { submitHandler, onChangeHandler } = useForm();
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    onChangeHandler(e.target.name, e.target.value);
+  const onSubmit = (data: FormValues) => {
+    loginApiCall(data);
   };
+
   return (
     <Box width={"63%"} textAlign={"center"}>
-      <Box marginBlockEnd={6}>
-        <Typography variant="xl">
-          <Localizer localeKey="LOGIN_TITLE" />
-        </Typography>
-      </Box>
-      <ContainerStyle>
-        <FormControl variant="standard" fullWidth>
-          <Label htmlFor="email">
-            <Localizer localeKey="LOGIN_EMAIL_ADDRESS" />
-          </Label>
-          <TextInput
-            placeholder={
-              convertLocale({ key: "LOGIN_EMAIL_ADDRESS_PLACEHOLDER" }).text
-            }
-            id="email"
-            type="email"
-            fullWidth
-            onChange={handleChange}
-          />
-        </FormControl>
-        <FormControl variant="standard">
-          <Label htmlFor="password">
-            <Localizer localeKey="LOGIN_PASSWORD" />
-          </Label>
-          <TextInput
-            id="password"
-            type="password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Localizer localeKey="LOGIN_SHOW_PASSWORD" />
-                </InputAdornment>
-              ),
-            }}
-            fullWidth
-            onChange={handleChange}
-          />
-        </FormControl>
-      </ContainerStyle>
-      <Submit>
-        <SubmitButton
-          variant="contained"
-          size="large"
-          fullWidth
-          onClick={loginApiCall}
-        >
-          <Typography variant="sm">
-            <Localizer localeKey="LOGIN" />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Box marginBlockEnd={6}>
+          <Typography variant="xl">
+            <Localizer localeKey="LOGIN_TITLE" />
           </Typography>
-        </SubmitButton>
+        </Box>
+        <ContainerStyle>
+          <FormControl variant="standard" fullWidth>
+            <Label htmlFor="email">
+              <Localizer localeKey="LOGIN_EMAIL_ADDRESS" />
+            </Label>
+            <TextInput
+              placeholder={
+                convertLocale({ key: "LOGIN_EMAIL_ADDRESS_PLACEHOLDER" }).text
+              }
+              id="email"
+              type="email"
+              fullWidth
+              {...register("email")}
+            />
+          </FormControl>
+          <FormControl variant="standard">
+            <Label htmlFor="password">
+              <Localizer localeKey="LOGIN_PASSWORD" />
+            </Label>
+            <TextInput
+              id="password"
+              type={passTextFieldType}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <ButtonBase onClick={() => setPassTextFieldType("text")}>
+                      <Localizer localeKey="LOGIN_SHOW_PASSWORD" />
+                    </ButtonBase>
+                  </InputAdornment>
+                ),
+              }}
+              fullWidth
+              {...register("password")}
+            />
+          </FormControl>
+        </ContainerStyle>
+        <Submit>
+          <SubmitButton
+            variant="contained"
+            size="large"
+            type="submit"
+            fullWidth
+          >
+            <Typography variant="sm">
+              <Localizer localeKey="LOGIN" />
+            </Typography>
+          </SubmitButton>
 
-        <Button size="small" onClick={() => navigate("/otp")}>
-          <Localizer localeKey="LOGIN_FORGET_PASS" />
-        </Button>
-      </Submit>
+          <Button size="small" onClick={() => navigate("/otp")}>
+            <Localizer localeKey="LOGIN_FORGET_PASS" />
+          </Button>
+        </Submit>
+      </form>
     </Box>
   );
 };

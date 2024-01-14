@@ -44,9 +44,9 @@ const UseApi = (): UseApiReturnType => {
     } else {
       axiosOptions.params = params;
     }
-    if (token && token.token) {
+    if (token && token.accessToken) {
       axiosOptions.headers = {
-        Authorization: token.token,
+        Authorization: token.accessToken,
       };
     }
     axios(axiosOptions)
