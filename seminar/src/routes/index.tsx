@@ -12,7 +12,7 @@ export const Routing = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/auth" element={<SignUp />} />
+        <Route path="/register" element={<SignUp />} />
         <Route path="/otp" element={<EmailOTP />} />
         <Route
           path="/student-details/:studentId"

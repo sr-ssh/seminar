@@ -28,7 +28,6 @@ const BasicSelect = ({
     onChange(event as any);
   };
 
-  console.log(options);
   return (
     <FormControl fullWidth>
       <Label htmlFor={labelLocalKey}>

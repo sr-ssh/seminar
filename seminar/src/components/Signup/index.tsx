@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import UseApi from "../../hooks/useApi";
 import { useForm } from "react-hook-form";
 import PasswordTextInput from "../PasswordTextInput";
+import { useAuth } from "../../hooks/useAuth";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -26,6 +27,7 @@ const SignUpForm = () => {
   const [areas, setAreas] = useState([]);
   const { register, handleSubmit, setValue } = useForm();
   const { apiCall } = UseApi();
+  useAuth();
 
   const onFieldChoose = (field: string) => {
     console.log(field);

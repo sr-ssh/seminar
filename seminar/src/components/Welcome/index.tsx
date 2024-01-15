@@ -45,7 +45,7 @@ export const WelcomeImage: React.FC<Props> = ({ isSignUp }) => {
           size="large"
           fullWidth
           onClick={() => {
-            isSignUp ? navigate("/login") : navigate("/auth");
+            isSignUp ? navigate("/login") : navigate("/register");
           }}
         >
           <Typography variant="md">

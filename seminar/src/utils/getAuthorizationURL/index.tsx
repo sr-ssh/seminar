@@ -1,5 +1,10 @@
 import { getCurrentURL } from "../getCurrentURL";
 
 export const getAuthorizationURL = () => {
-  return getCurrentURL() === ("/login" || "otp" || "auth");
+  const currentURL = getCurrentURL();
+  return (
+    currentURL === "/login" ||
+    currentURL === "/otp" ||
+    currentURL === "/register"
+  );
 };
