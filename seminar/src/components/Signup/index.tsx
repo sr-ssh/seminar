@@ -1,4 +1,11 @@
-import { Box, Button, FormControl, Typography, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  FormControl,
+  Typography,
+  styled,
+} from "@mui/material";
 import BasicSelect from "./Select";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { Label } from "../Label";
@@ -9,6 +16,8 @@ import UseApi from "../../hooks/useApi";
 import { useForm } from "react-hook-form";
 import PasswordTextInput from "../PasswordTextInput";
 import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { ACCOUNT_URL, CORE_URL } from "../../constants/global";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -25,33 +34,37 @@ const SubmitButton = styled(Button)({
 const SignUpForm = () => {
   const [fields, setFields] = useState([]);
   const [areas, setAreas] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const { register, handleSubmit, setValue } = useForm();
   const { apiCall } = UseApi();
   useAuth();
 
   const onFieldChoose = (field: string) => {
-    console.log(field);
     apiCall({
-      url: `https://api.seminar.arkamond.com/api/core/areas?id=${field}`,
+      url: `${CORE_URL.AREAS}?id=${field}`,
       method: "get",
       successCallback: ({ data }) => setAreas(data.data),
     });
   };
 
   const submitHandler = (data: any) => {
-    console.log(data);
+    setLoading(true);
     apiCall({
-      url: "https://api.seminar.arkamond.com/api/account/auth/register/",
+      url: ACCOUNT_URL.AUTH_REGISTER,
       query: data,
       method: "post",
-      successCallback: ({ data }) => setFields(data.data),
+      successCallback: () => {
+        setLoading(false);
+        navigate("/otp");
+      },
     });
   };
 
   useEffect(() => {
     const getFields = () => {
       apiCall({
-        url: "https://api.seminar.arkamond.com/api/core/fields/",
+        url: CORE_URL.FIELDS,
         method: "get",
         successCallback: ({ data }) => setFields(data.data),
       });
@@ -139,10 +152,15 @@ const SignUpForm = () => {
         size="large"
         fullWidth
         onClick={handleSubmit(submitHandler)}
+        disabled={loading}
       >
-        <Typography variant="sm">
-          <Localizer localeKey="SIGNUP_SUBMIT_BUTTON" />
-        </Typography>
+        {loading ? (
+          <CircularProgress size={25} />
+        ) : (
+          <Typography variant="sm">
+            <Localizer localeKey="SIGNUP_SUBMIT_BUTTON" />
+          </Typography>
+        )}
       </SubmitButton>
     </Box>
   );

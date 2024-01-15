@@ -4,6 +4,7 @@ import { userSelectors } from "../../store/user/selector";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserInfo } from "../../store/user";
 import { useNavigate } from "react-router-dom";
+import { ACCOUNT_URL } from "../../constants/global";
 
 export const useAuth = () => {
   const { apiCall } = UseApi();
@@ -19,7 +20,7 @@ export const useAuth = () => {
   const getUserData = () => {
     const query = {};
     apiCall({
-      url: "https://api.seminar.arkamond.com/api/account/user/me/",
+      url: ACCOUNT_URL.USER_ME,
       query,
       method: "get",
       successCallback: onGetUserDataSuccess,
