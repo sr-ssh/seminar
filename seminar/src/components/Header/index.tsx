@@ -4,6 +4,8 @@ import * as React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
+import { userSelectors } from "../../store/user/selector";
+import { useSelector } from "react-redux";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   position: "fixed",
@@ -31,6 +33,7 @@ const StyledButton = styled(Button)(({ theme }) => ({
 }));
 
 export const Header: React.FC = () => {
+  const user = useSelector(userSelectors.user);
   return (
     <StyledBox>
       <PopupState variant="popover" popupId="demo-popup-menu">
@@ -42,11 +45,11 @@ export const Header: React.FC = () => {
                 fontSize={"small"}
               />
               <Typography marginX={2} variant="xs" sx={{ color: "popo.light" }}>
-                name
+                {user.username}
               </Typography>
               <Avatar
                 sx={{ width: "32px", height: "32px" }}
-                src="https://www.google.com/logos/doodles/2024/new-years-day-2024-6753651837110174-la202124.gif"
+                src={user.avatar}
               />
             </StyledButton>
             <Menu {...bindMenu(popupState)}>

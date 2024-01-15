@@ -46,7 +46,7 @@ const UseApi = (): UseApiReturnType => {
     }
     if (token && token.accessToken) {
       axiosOptions.headers = {
-        Authorization: token.accessToken,
+        Authorization: "Bearer " + token.accessToken,
       };
     }
     axios(axiosOptions)

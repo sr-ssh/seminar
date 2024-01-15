@@ -14,7 +14,10 @@ export const Routing = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/auth" element={<SignUp />} />
         <Route path="/otp" element={<EmailOTP />} />
-        <Route path="/student-details" element={<StudentDetails />} />
+        <Route
+          path="/student-details/:studentId"
+          element={<StudentDetails />}
+        />
         <Route
           path="/"
           element={

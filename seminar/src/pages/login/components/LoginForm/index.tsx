@@ -48,7 +48,6 @@ const LoginForm = () => {
   const { apiCall } = UseApi();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector(userSelectors.user);
   const token = useSelector(userSelectors.token);
 
   type FormValues = {
@@ -59,21 +58,13 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormValues>();
 
   const [passTextFieldType, setPassTextFieldType] = useState("password");
 
-  useEffect(() => {
-    if (token) {
-      getUserData();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
-
   const onGetUserDataSuccess = (res: any) => {
-    // dispatch(setUserInfo(res.data.data));
-    console.log(res);
+    dispatch(setUserInfo(res.data));
     navigate("/");
   };
 
@@ -86,6 +77,12 @@ const LoginForm = () => {
       successCallback: onGetUserDataSuccess,
     });
   };
+
+  useEffect(() => {
+    if (token.accessToken) getUserData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const onLoginSuccess = (res: any) => {
     dispatch(
