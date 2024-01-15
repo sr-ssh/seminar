@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputAdornment,
-  Typography,
-  styled,
-} from "@mui/material";
+import { Box, Button, FormControl, Typography, styled } from "@mui/material";
 import BasicSelect from "./Select";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { Label } from "../Label";
@@ -14,6 +7,7 @@ import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 import { useEffect, useState } from "react";
 import UseApi from "../../hooks/useApi";
 import { useForm } from "react-hook-form";
+import PasswordTextInput from "../PasswordTextInput";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -121,19 +115,7 @@ const SignUpForm = () => {
           <Label htmlFor="password">
             <Localizer localeKey="SIGNUP_PASSWORD" />
           </Label>
-          <TextInput
-            id="password"
-            type="password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Localizer localeKey="SIGNUP_SHOW_PASSWORD" />
-                </InputAdornment>
-              ),
-            }}
-            fullWidth
-            {...register("password")}
-          />
+          <PasswordTextInput options={register("password")} />
         </FormControl>
         <Box display={"flex"} gap={3}>
           <BasicSelect
