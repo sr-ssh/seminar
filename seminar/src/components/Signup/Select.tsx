@@ -11,12 +11,14 @@ const BasicSelect = ({
   labelLocalKey,
   placeHolder,
   onChange,
+  options,
 }: {
   labelLocalKey: string;
   placeHolder: string;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  options: any[];
 }) => {
   const [age, setAge] = React.useState("");
   const theme = useTheme();
@@ -26,6 +28,7 @@ const BasicSelect = ({
     onChange(event as any);
   };
 
+  console.log(options);
   return (
     <FormControl fullWidth>
       <Label htmlFor={labelLocalKey}>
@@ -52,9 +55,11 @@ const BasicSelect = ({
             <Localizer localeKey={placeHolder} />
           </em>
         </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {options?.map((item) => (
+          <MenuItem key={item.id} value={item.id}>
+            {item.title}
+          </MenuItem>
+        ))}
       </CustomSelect>
     </FormControl>
   );

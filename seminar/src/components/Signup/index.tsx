@@ -7,11 +7,13 @@ import {
   styled,
 } from "@mui/material";
 import BasicSelect from "./Select";
-import { useForm } from "../../hooks/useForm/useForm";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { Label } from "../Label";
 import { TextInput } from "../TextInput";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
+import { useEffect, useState } from "react";
+import UseApi from "../../hooks/useApi";
+import { useForm } from "react-hook-form";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -26,13 +28,43 @@ const SubmitButton = styled(Button)({
 });
 
 const SignUpForm = () => {
-  const { submitHandler, onChangeHandler } = useForm();
+  const [fields, setFields] = useState([]);
+  const [areas, setAreas] = useState([]);
+  const { register, handleSubmit, setValue } = useForm();
+  const { apiCall } = UseApi();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    onChangeHandler(e.target.name, e.target.value);
+  const onFieldChoose = (field: string) => {
+    console.log(field);
+    apiCall({
+      url: `https://api.seminar.arkamond.com/api/core/areas?id=${field}`,
+      method: "get",
+      successCallback: ({ data }) => setAreas(data.data),
+    });
   };
+
+  const submitHandler = (data: any) => {
+    console.log(data);
+    apiCall({
+      url: "https://api.seminar.arkamond.com/api/account/auth/register/",
+      query: data,
+      method: "post",
+      successCallback: ({ data }) => setFields(data.data),
+    });
+  };
+
+  useEffect(() => {
+    const getFields = () => {
+      apiCall({
+        url: "https://api.seminar.arkamond.com/api/core/fields/",
+        method: "get",
+        successCallback: ({ data }) => setFields(data.data),
+      });
+    };
+
+    getFields();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Box width={"63%"} textAlign={"center"}>
       <Box marginBlockEnd={6}>
@@ -43,32 +75,31 @@ const SignUpForm = () => {
       <ContainerStyle>
         <Box display={"flex"} gap={3}>
           <FormControl variant="standard" sx={{ flex: 1 }}>
-            <Label htmlFor="name">
+            <Label htmlFor="full_name">
               <Localizer localeKey="SIGNUP_NAME" />
             </Label>
             <TextInput
               placeholder={
                 convertLocale({ key: "SIGNUP_NAME_PLACEHOLDER" }).text
               }
-              id="name"
-              name="name"
+              id="full_name"
               type="text"
               fullWidth
-              onChange={handleChange}
+              {...register("full_name")}
             />
           </FormControl>
           <FormControl variant="standard" sx={{ flex: 1 }}>
-            <Label htmlFor="student-number">
+            <Label htmlFor="number">
               <Localizer localeKey="SIGNUP_STUDENT_NUMBER" />
             </Label>
             <TextInput
               placeholder={
                 convertLocale({ key: "SIGNUP_STUDENT_NUMBER_PLACEHOLDER" }).text
               }
-              id="student"
+              id="number"
               type="tel"
               fullWidth
-              onChange={handleChange}
+              {...register("number")}
             />
           </FormControl>
         </Box>
@@ -83,7 +114,7 @@ const SignUpForm = () => {
             id="email"
             type="email"
             fullWidth
-            onChange={handleChange}
+            {...register("email")}
           />
         </FormControl>
         <FormControl variant="standard">
@@ -101,19 +132,21 @@ const SignUpForm = () => {
               ),
             }}
             fullWidth
-            onChange={handleChange}
+            {...register("password")}
           />
         </FormControl>
         <Box display={"flex"} gap={3}>
           <BasicSelect
             labelLocalKey="SIGNUP_MAJOR"
             placeHolder="SIGNUP_MAJOR_PLACEHOLDER"
-            onChange={handleChange}
+            options={fields}
+            onChange={(e) => onFieldChoose(e.target.value)}
           />
           <BasicSelect
             labelLocalKey="SIGNUP_ORIENTATION"
             placeHolder="SIGNUP_ORIENTATION_PLACEHOLDER"
-            onChange={handleChange}
+            options={areas}
+            onChange={(e) => setValue("area", e.target.value)}
           />
         </Box>
       </ContainerStyle>
@@ -121,7 +154,7 @@ const SignUpForm = () => {
         variant="contained"
         size="large"
         fullWidth
-        onClick={submitHandler}
+        onClick={handleSubmit(submitHandler)}
       >
         <Typography variant="sm">
           <Localizer localeKey="SIGNUP_SUBMIT_BUTTON" />
