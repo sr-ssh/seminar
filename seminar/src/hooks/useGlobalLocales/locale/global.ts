@@ -61,5 +61,8 @@ export const globalLocales: GlobalLocalesType = {
   STUDENT_DETAILS_SID: "شماره دانشجویی:",
   STUDENT_DETAILS_SUPERVISOR: "استاد راهنما:",
   STUDENT_DETAILS_FIELD: "گرایش:",
-  STUDENT_DETAILS_EMAIL: 'پست الکترونیکی:'
+  STUDENT_DETAILS_EMAIL: 'پست الکترونیکی:',
+
+  THESIS_LIST_TITLE: "لیست جلسات دفاع",
+  THESIS_SEARCH_PLACE_HOLDER: "جست‌وجو"
 };

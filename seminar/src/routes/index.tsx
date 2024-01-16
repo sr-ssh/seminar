@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CustomDataGrid } from "../components/DataGrid";
 import Login from "../pages/Login";
 import StudentDetails from "../pages/StudentDetails";
+import Thesises from "../pages/Thesis";
 
 export const Routing = () => {
   return (
@@ -18,6 +19,7 @@ export const Routing = () => {
           path="/student-details/:studentId"
           element={<StudentDetails />}
         />
+        <Route path="/thesis" element={<Thesises />} />
         <Route
           path="/"
           element={
