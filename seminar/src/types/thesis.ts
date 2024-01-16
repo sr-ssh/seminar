@@ -1,3 +1,7 @@
+import { Agent } from "./agent";
+import { Area } from "./area";
+import { Professor } from "./professor";
+
 export interface Thesis {
   id: number;
   createdAt: string;
@@ -5,11 +9,11 @@ export interface Thesis {
   student: string;
   capacity: string;
   reservedCapacity: string;
-  area: string;
-  agent: number;
-  supervisors: number[];
-  advisors: number[];
-  interJudges: number[];
-  externalJudges: number[];
+  area: Area;
+  agent: Agent;
+  supervisors: Professor[];
+  advisors: Professor[];
+  interJudges: Professor[];
+  externalJudges: Professor[];
   tags: string[];
 }

@@ -45,7 +45,7 @@ export const Header: React.FC = () => {
                 fontSize={"small"}
               />
               <Typography marginX={2} variant="xs" sx={{ color: "popo.light" }}>
-                {user.username}
+                {user.firstName}
               </Typography>
               <Avatar
                 sx={{ width: "32px", height: "32px" }}

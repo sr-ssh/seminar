@@ -34,6 +34,18 @@ export const UNIVERSITY_URL = {
   UNIVERSITY: UNIVERSITY_BASE + "/university",
 };
 
+export const initArea = {
+  field: 0,
+  id: 0,
+  title: "",
+};
+
+export const initAgent = {
+  id: 0,
+  university: 0,
+  user: 0,
+  createdAt: "",
+};
 export const initUser = {
   id: 0,
   firstName: "",
@@ -52,10 +64,10 @@ export const initUser = {
   type: 0,
 };
 
-export const initSupervisor = {
+export const initProfessor = {
   id: 0,
   createdAt: "",
-  user: 0,
+  user: initUser,
   university: 0,
 };
 
@@ -66,8 +78,8 @@ export const initStudent = {
   supervisorGrade: 0,
   teacherGrade: 0,
   seminarClass: "",
-  area: "",
-  supervisor: initSupervisor,
+  area: initArea,
+  supervisor: initProfessor,
 };
 
 export const initThesis = {
@@ -77,11 +89,11 @@ export const initThesis = {
   student: "",
   capacity: "",
   reservedCapacity: "",
-  area: "",
-  agent: 0,
-  supervisors: [],
-  advisors: [],
-  interJudges: [],
-  externalJudges: [],
+  area: initArea,
+  agent: initAgent,
+  supervisors: [initProfessor],
+  advisors: [initProfessor],
+  interJudges: [initProfessor],
+  externalJudges: [initProfessor],
   tags: [],
 };

@@ -1,3 +1,4 @@
+import { Area } from "./area";
 import { Professor } from "./professor";
 import { User } from "./user";
 
@@ -8,6 +9,6 @@ export interface Student {
   supervisorGrade: number;
   teacherGrade: number;
   seminarClass: string;
-  area: string;
+  area: Area;
   supervisor: Professor;
 }

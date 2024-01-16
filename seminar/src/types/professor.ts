@@ -1,6 +1,8 @@
+import { User } from "./user";
+
 export interface Professor {
   id: number;
   createdAt: string;
-  user: number;
+  user: User;
   university: number;
 }

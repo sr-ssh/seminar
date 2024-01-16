@@ -42,7 +42,9 @@ export const StudentDetail: React.FC<Props> = ({ student }) => {
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_SUPERVISOR" />
           </Typography>
-          <Typography variant="md">{student.supervisor.user}</Typography>
+          <Typography variant="md">
+            {student.supervisor.user.firstName}
+          </Typography>
         </DetailsStyle>
         <DetailsStyle
           sx={{
@@ -52,7 +54,7 @@ export const StudentDetail: React.FC<Props> = ({ student }) => {
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_FIELD" />
           </Typography>
-          <Typography variant="md">{student.area}</Typography>
+          <Typography variant="md">{student.area.title}</Typography>
         </DetailsStyle>
         <DetailsStyle>
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>

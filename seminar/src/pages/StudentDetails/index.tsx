@@ -68,7 +68,7 @@ const StudentDetails = () => {
           id: item.id,
           title: item.title,
           student: item.student,
-          supervisor: item.supervisors[0]?.toString(),
+          supervisor: item.supervisors[0]?.user.firstName,
           createdAt: item.createdAt,
         };
       });
