@@ -10,7 +10,11 @@ const BoxStyle = styled(Box)({
   marginBlockEnd: 24,
 });
 
-const AutoAdvanceInput: React.FC = () => {
+const AutoAdvanceInput = ({
+  onSubmit,
+}: {
+  onSubmit: (value: string) => void;
+}) => {
   const fieldCount: number = 5;
   const inputRefs = useRef<HTMLInputElement[]>(Array(fieldCount).fill(null));
   const [formFields, setFormFields] = useState<string[]>(
@@ -27,6 +31,11 @@ const AutoAdvanceInput: React.FC = () => {
 
       if (inputValue && index < fieldCount - 1) {
         inputRefs.current[index + 1]?.focus();
+      }
+      if (index === fieldCount - 1) {
+        const inputValues = inputRefs.current.map((inputRef) => inputRef.value);
+        const code = inputValues.join("");
+        onSubmit(code);
       }
     };
 

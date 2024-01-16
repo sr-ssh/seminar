@@ -18,6 +18,8 @@ import PasswordTextInput from "../PasswordTextInput";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { ACCOUNT_URL, CORE_URL } from "../../constants/global";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../store/user";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -36,6 +38,7 @@ const SignUpForm = () => {
   const [areas, setAreas] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { register, handleSubmit, setValue } = useForm();
   const { apiCall } = UseApi();
   useAuth();
@@ -51,11 +54,12 @@ const SignUpForm = () => {
   const submitHandler = (data: any) => {
     setLoading(true);
     apiCall({
-      url: ACCOUNT_URL.AUTH_REGISTER,
+      url: ACCOUNT_URL.AUTH_REGISTER + "/",
       query: data,
       method: "post",
       successCallback: () => {
         setLoading(false);
+        dispatch(setUserInfo({ ...data, firstName: data.lastName, type: 1 }));
         navigate("/otp");
       },
     });
