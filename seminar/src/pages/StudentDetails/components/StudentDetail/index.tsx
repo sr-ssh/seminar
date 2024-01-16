@@ -1,7 +1,10 @@
 import { Avatar, Box, Typography, styled } from "@mui/material";
 import { Localizer } from "../../../../hooks/useGlobalLocales/Localizer";
+import { Student } from "../../../../types/student";
 
-interface Props {}
+interface Props {
+  student: Student;
+}
 
 const DetailsStyle = styled(Box)({
   display: "flex",
@@ -9,7 +12,7 @@ const DetailsStyle = styled(Box)({
   textAlign: "start",
 });
 
-export const StudentDetail: React.FC<Props> = () => {
+export const StudentDetail: React.FC<Props> = ({ student }) => {
   return (
     <Box
       sx={{
@@ -29,7 +32,7 @@ export const StudentDetail: React.FC<Props> = () => {
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_SID" />
           </Typography>
-          <Typography variant="md">810198543</Typography>
+          <Typography variant="md">{student.SID}</Typography>
         </DetailsStyle>
         <DetailsStyle
           sx={{
@@ -39,7 +42,7 @@ export const StudentDetail: React.FC<Props> = () => {
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_SUPERVISOR" />
           </Typography>
-          <Typography variant="md">810198543</Typography>
+          <Typography variant="md">{student.supervisor.user}</Typography>
         </DetailsStyle>
         <DetailsStyle
           sx={{
@@ -49,21 +52,23 @@ export const StudentDetail: React.FC<Props> = () => {
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_FIELD" />
           </Typography>
-          <Typography variant="md">810198543</Typography>
+          <Typography variant="md">{student.area}</Typography>
         </DetailsStyle>
         <DetailsStyle>
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_EMAIL" />
           </Typography>
-          <Typography variant="md">810198543</Typography>
+          <Typography variant="md">{student.user.email}</Typography>
         </DetailsStyle>
       </Box>
       <Box>
         <Avatar
           sx={{ width: "260px", height: "260px", marginBottom: 3 }}
-          src="https://www.google.com/logos/doodles/2024/new-years-day-2024-6753651837110174-la202124.gif"
+          src={student.user.avatar}
         />
-        <Typography variant="xl">hossein rahimi</Typography>
+        <Typography variant="xl">
+          {student.user.firstName + " " + student.user.lastName}
+        </Typography>
       </Box>
     </Box>
   );

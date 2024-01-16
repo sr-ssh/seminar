@@ -53,7 +53,7 @@ export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
       </StyledBox>
       <Box
         sx={{
-          left: "364px",
+          left: "300px",
           flexGrow: 1,
           display: "flex",
           position: "absolute",

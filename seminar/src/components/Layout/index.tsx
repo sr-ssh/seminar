@@ -10,7 +10,7 @@ export const Layout = () => {
       <Box
         sx={[
           { position: "relative" },
-          !getAuthorizationURL() && { top: "104px" },
+          !getAuthorizationURL() && { top: "72px" },
         ]}
       >
         <Routing />

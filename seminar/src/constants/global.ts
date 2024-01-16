@@ -1,6 +1,6 @@
-export const BASE_URL = 'https://api.seminar.arkamond.com/api'
+export const BASE_URL = "https://api.seminar.arkamond.com/api";
 
-const ACCOUNT_BASE = BASE_URL + "/account"
+const ACCOUNT_BASE = BASE_URL + "/account";
 export const ACCOUNT_URL = {
   AUTH_LOGIN: ACCOUNT_BASE + "/auth/login",
   AUTH_LOGOUT: ACCOUNT_BASE + "/auth/logout",
@@ -11,18 +11,20 @@ export const ACCOUNT_URL = {
   USER: ACCOUNT_BASE + "/user",
   USER_ME: ACCOUNT_BASE + "/user/me",
   USER_AVATAR: ACCOUNT_BASE + "/user/set_avatar",
-}
+  STUDENTS: ACCOUNT_BASE + "/account/student",
+  STUDENT_DETAILS: ACCOUNT_BASE + "/account/student",
+};
 
-const CORE_BASE = BASE_URL + "/core"
+const CORE_BASE = BASE_URL + "/core";
 export const CORE_URL = {
   AREAS: CORE_BASE + "/areas",
   ATTACHMENT: CORE_BASE + "/attachment",
   DEFAULT_AREA_TAGS: CORE_BASE + "/default_area_tags",
   FIELDS: CORE_BASE + "/fields",
   TAGS: CORE_BASE + "/tags",
-}
+};
 
-const UNIVERSITY_BASE = BASE_URL + "/university"
+const UNIVERSITY_BASE = BASE_URL + "/university";
 export const UNIVERSITY_URL = {
   COUNTRY: UNIVERSITY_BASE + "/country",
   PROFESSOR: UNIVERSITY_BASE + "/professor",
@@ -30,4 +32,56 @@ export const UNIVERSITY_URL = {
   SEMINAR_CLASS: UNIVERSITY_BASE + "/seminar_class",
   THESIS: UNIVERSITY_BASE + "/thesis",
   UNIVERSITY: UNIVERSITY_BASE + "/university",
-}
+};
+
+export const initUser = {
+  id: 0,
+  firstName: "",
+  lastName: "",
+  avatar: "",
+  dateJoined: "",
+  isActive: false,
+  isManager: false,
+  isStaff: false,
+  isSuperuser: false,
+  lastLogin: "",
+  username: "",
+  email: "",
+  groups: [""],
+  permissions: [""],
+  type: 0,
+};
+
+export const initSupervisor = {
+  id: 0,
+  createdAt: "",
+  user: 0,
+  university: 0,
+};
+
+export const initStudent = {
+  id: 0,
+  user: initUser,
+  SID: 0,
+  supervisorGrade: 0,
+  teacherGrade: 0,
+  seminarClass: "",
+  area: "",
+  supervisor: initSupervisor,
+};
+
+export const initThesis = {
+  id: 0,
+  createdAt: "",
+  title: "",
+  student: "",
+  capacity: "",
+  reservedCapacity: "",
+  area: "",
+  agent: 0,
+  supervisors: [],
+  advisors: [],
+  interJudges: [],
+  externalJudges: [],
+  tags: [],
+};

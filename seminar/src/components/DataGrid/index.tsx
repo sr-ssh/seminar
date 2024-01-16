@@ -4,6 +4,7 @@ import { styled } from "@mui/material";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 import PaginationRounded from "../Pagination";
 import DataGridSkeleton from "./Skeleton";
+import React from "react";
 
 const DataGridStyle = styled(DataGrid)(({ theme }) => ({
   border: "none",
@@ -42,7 +43,7 @@ const DataGridStyle = styled(DataGrid)(({ theme }) => ({
   },
 }));
 
-const columns: GridColDef[] = [
+const sampleColumns: GridColDef[] = [
   {
     field: "title",
     headerName: convertLocale({ key: "DATA_GRID_TITLE_COLUMN" }).text,
@@ -75,7 +76,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
+const sampleRows = [
   {
     id: 1,
     title: "مدلسازی سیستم‌های اتکاپذیر در سام...",
@@ -141,7 +142,15 @@ const rows = [
   },
 ];
 
-export function CustomDataGrid() {
+interface Props {
+  columns: GridColDef[];
+  rows: any;
+}
+
+export const CustomDataGrid: React.FC<Props> = ({
+  columns = sampleColumns,
+  rows = sampleRows,
+}) => {
   return (
     <Box sx={{ height: "auto", width: "100%" }}>
       <DataGridStyle
@@ -165,4 +174,4 @@ export function CustomDataGrid() {
       />
     </Box>
   );
-}
+};
