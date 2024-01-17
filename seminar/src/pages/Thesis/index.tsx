@@ -94,7 +94,7 @@ const Thesises = () => {
 
   return (
     <>
-      <SideBar menuItems={StudentMenuItem} selectedIndex={1}>
+      <SideBar menuItems={StudentMenuItem}>
         <ContainerStyle>
           <Typography variant="lg">
             <Localizer localeKey="THESIS_LIST_TITLE" />
