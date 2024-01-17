@@ -1,12 +1,13 @@
-import { Box, Button, Typography, styled } from "@mui/material";
+import { Box, MenuItem, Typography, styled } from "@mui/material";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
-import { MenuItem } from "../../hooks/useGlobalLocales/GlobalLocalesType";
+import { MenuItem as MenuItemType } from "../../hooks/useGlobalLocales/GlobalLocalesType";
 import { useNavigate } from "react-router-dom";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 interface Props {
-  menuItems: MenuItem[];
+  menuItems: MenuItemType[];
   children: ReactNode;
+  selectedIndex?: number;
 }
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -26,18 +27,30 @@ const StyledBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.gohan.light,
 }));
 
-const Menu = styled(Button)(({ theme }) => ({
+const Menu = styled(MenuItem)(({ theme, selected }) => ({
   marginTop: 4,
   marginBottom: 4,
   width: "fit-content",
-  color: theme.palette.bulma.light,
+  borderRadius: 8,
   ":hover": {
     color: theme.palette.piccolo.light,
     backgroundColor: theme.palette.ghost.light,
   },
+  ...(selected
+    ? {
+        color: theme.palette.piccolo.light,
+        backgroundColor: theme.palette.ghost.light,
+      }
+    : { color: theme.palette.bulma.light }),
 }));
 
-export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
+export const SideBar: React.FC<Props> = ({
+  menuItems,
+  children,
+  selectedIndex = 0,
+}) => {
+  const [selectedItem, setSelectedItem] = useState(selectedIndex);
+
   const navigate = useNavigate();
   return (
     <Box sx={{ display: "flex", width: "auto" }}>
@@ -46,7 +59,14 @@ export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
           <Localizer localeKey="SEMINAR" />
         </Typography>
         {menuItems.map((menu, index) => (
-          <Menu key={index} onClick={() => navigate(menu.link)}>
+          <Menu
+            selected={index === selectedItem}
+            key={index}
+            onClick={() => {
+              setSelectedItem(index);
+              navigate(menu.link);
+            }}
+          >
             {menu.title}
           </Menu>
         ))}

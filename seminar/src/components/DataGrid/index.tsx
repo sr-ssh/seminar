@@ -147,6 +147,7 @@ interface Props {
   rows: any;
   loading?: boolean;
   numberOfPages?: number;
+  currentPage?: number;
 }
 
 export const CustomDataGrid: React.FC<Props> = ({
@@ -154,6 +155,7 @@ export const CustomDataGrid: React.FC<Props> = ({
   rows = sampleRows,
   loading = false,
   numberOfPages = 0,
+  currentPage,
 }) => {
   return (
     <Box sx={{ height: "auto", width: "100%" }}>
@@ -168,13 +170,18 @@ export const CustomDataGrid: React.FC<Props> = ({
           },
         }}
         slots={{
-          pagination: PaginationRounded({ count: numberOfPages }),
+          pagination: () => (
+            <PaginationRounded
+              count={numberOfPages}
+              defaultPage={currentPage}
+            />
+          ),
           loadingOverlay: DataGridSkeleton,
         }}
         pageSizeOptions={[5]}
-        disableRowSelectionOnClick
         rowHeight={56}
         loading={loading}
+        disableRowSelectionOnClick
       />
     </Box>
   );

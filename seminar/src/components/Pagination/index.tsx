@@ -9,10 +9,17 @@ const NextButton = () => (
   <img src="/assets/images/next-button.svg" alt="next-button" />
 );
 
-export default function PaginationRounded({ count }: { count: number }) {
+export default function PaginationRounded({
+  count,
+  defaultPage = 1,
+}: {
+  count: number;
+  defaultPage?: number;
+}) {
   return (
     <Pagination
       count={count}
+      defaultPage={defaultPage}
       shape="rounded"
       color="primary"
       dir="rtl"

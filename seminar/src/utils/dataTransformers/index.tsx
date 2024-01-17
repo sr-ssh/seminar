@@ -3,6 +3,7 @@ import { Professor } from "../../types/professor";
 import { User } from "../../types/user";
 import { Area } from "../../types/area";
 import { Agent } from "../../types/agent";
+import { GetUniversityThesisResponse } from "../../types/api";
 
 export const areaTransformer = (data: any) => {
   return {
@@ -84,5 +85,13 @@ export const thesisTransformer = (data: any) => {
       professorTransformer(item),
     ),
     tags: data.tags,
+  };
+};
+
+export const getThesisTransformer = (data: GetUniversityThesisResponse) => {
+  return {
+    count: data.count,
+    numberOfPages: data.num_of_pages,
+    data: data.data.map((item) => thesisTransformer(item)),
   };
 };

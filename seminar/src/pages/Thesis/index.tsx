@@ -7,16 +7,20 @@ import {
   styled,
 } from "@mui/material";
 import { SideBar } from "../../components/SideBar";
-import { TeacherMenuItem, columns } from "./constants";
+import { columns } from "./constants";
 import { CustomDataGrid } from "../../components/DataGrid";
 import UseApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { thesisTransformer } from "../../utils/dataTransformers";
-import { UNIVERSITY_URL, initThesis } from "../../constants/global";
-import { Thesis } from "../../types/thesis";
+import { getThesisTransformer } from "../../utils/dataTransformers";
+import {
+  StudentMenuItem,
+  UNIVERSITY_URL,
+  initThesis,
+} from "../../constants/global";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { TextInput } from "../../components/TextInput";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
+import { Thesis } from "../../types/thesis";
 
 const ContainerStyle = styled(Container)({
   textAlign: "start",
@@ -27,7 +31,15 @@ const ContainerStyle = styled(Container)({
 
 const Thesises = () => {
   const { apiCall, loading } = UseApi();
-  const [thesis, setThesis] = useState<Thesis[]>([initThesis]);
+  const [data, setData] = useState<{
+    data: Thesis[];
+    count?: number;
+    numberOfPages?: number;
+  }>({
+    data: [initThesis],
+    count: 0,
+    numberOfPages: 0,
+  });
   const [filteredThesis, setFilteredThesis] = useState([
     {
       id: 1,
@@ -39,7 +51,15 @@ const Thesises = () => {
   ]);
 
   const onThesisSuccess = (res: any) => {
-    setThesis(res.data.data.map((theses: any) => thesisTransformer(theses)));
+    setData(getThesisTransformer(res.data));
+  };
+
+  const search = (e: React.ChangeEvent<HTMLInputElement>) => {
+    apiCall({
+      url: `${UNIVERSITY_URL.THESIS}?title=${e.target.value}`,
+      method: "get",
+      successCallback: onThesisSuccess,
+    });
   };
 
   useEffect(() => {
@@ -55,23 +75,26 @@ const Thesises = () => {
   }, []);
 
   useEffect(() => {
-    if (thesis) {
-      const filterThesis = thesis?.map((item) => {
+    if (data.data) {
+      console.log(data);
+      const filterThesis = data.data.map((item) => {
         return {
           id: item.id,
           title: item.title,
           student: item.student,
           supervisor: item.supervisors[0]?.toString(),
-          createdAt: item.createdAt,
+          createdAt: new Intl.DateTimeFormat("fa-IR").format(
+            new Date(item.createdAt || Date.now()),
+          ),
         };
       });
       setFilteredThesis(filterThesis);
     }
-  }, [thesis]);
+  }, [data]);
 
   return (
     <>
-      <SideBar menuItems={TeacherMenuItem}>
+      <SideBar menuItems={StudentMenuItem} selectedIndex={1}>
         <ContainerStyle>
           <Typography variant="lg">
             <Localizer localeKey="THESIS_LIST_TITLE" />
@@ -83,6 +106,7 @@ const Thesises = () => {
               }
               type="text"
               sx={{ width: "65%" }}
+              onChange={search}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -98,6 +122,8 @@ const Thesises = () => {
             columns={columns}
             rows={filteredThesis}
             loading={loading}
+            numberOfPages={data.numberOfPages}
+            currentPage={data.count}
           />
         </ContainerStyle>
       </SideBar>

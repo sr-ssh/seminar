@@ -1,3 +1,5 @@
+import { MenuItem } from "../hooks/useGlobalLocales/GlobalLocalesType";
+
 export const BASE_URL = "https://api.seminar.arkamond.com/api";
 
 const ACCOUNT_BASE = BASE_URL + "/account";
@@ -97,3 +99,10 @@ export const initThesis = {
   externalJudges: [initProfessor],
   tags: [],
 };
+
+export const StudentMenuItem: MenuItem[] = [
+  { title: "انتخاب استاد راهنما و کلاس سمینار", link: "" },
+  { title: "جلسات دفاع", link: "/thesis" },
+  { title: "جلسات ثبت نام شده", link: "" },
+  { title: "گواهی نامه‌ها", link: "" },
+];
