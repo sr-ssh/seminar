@@ -67,6 +67,17 @@ export const globalLocales: GlobalLocalesType = {
   THESIS_LIST_TITLE: "لیست جلسات دفاع",
   THESIS_SEARCH_PLACE_HOLDER: "جست‌وجو",
 
+  THESIS_DETAILS_PAGE_TITLE: "جزئیات جلسه دفاع",
+  THESIS_DETAILS_TITLE: "عنوان:",
+  THESIS_DETAILS_EN_TITLE: "عنوان انگلیسی:",
+  THESIS_DETAILS_STUDENT: "دانشجو:",
+  THESIS_DETAILS_SUPERVISOR: "استاد راهنما:",
+  THESIS_DETAILS_AREAS: "گرایش:",
+  THESIS_DETAILS_DATE_AND_PLACE: "تاریخ و مکان دفاع:",
+  THESIS_DETAILS_AGENT: "نماینده تحصیلات تکمیلی:",
+  THESIS_DETAILS_TAGS: "تگ‌ها:",
+  THESIS_DETAILS_SUMMERY: "چکیده: ",
+
   STUDENTS_LIST_TITLE: "لیست دانشجویان",
   STUDENTS_LIST_GRID_STUDENT_NAME: "نام دانشجو",
   STUDENTS_LIST_GRID_SID: "شماره دانشجویی",

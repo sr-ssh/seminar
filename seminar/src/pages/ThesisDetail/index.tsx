@@ -3,6 +3,16 @@ import CustomChip from "../../components/Chip";
 import ThesisForm from "./components/Form";
 import { SideBar } from "../../components/SideBar";
 import { Header } from "../../components/Header";
+import {
+  StudentMenuItem,
+  UNIVERSITY_URL,
+  initThesis,
+} from "../../constants/global";
+import { thesisTransformer } from "../../utils/dataTransformers";
+import { useEffect, useState } from "react";
+import UseApi from "../../hooks/useApi";
+import { ThesisDetailType } from "../../types/thesis";
+import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -21,32 +31,47 @@ const BoxStyles = styled(Box)({
   flexDirection: "column",
 });
 
-const studentPanelMenuItems = [
-  { title: "انتخاب استاد راهنما و کلاس سمینار", link: "" },
-  { title: "جلسات دفاع", link: "" },
-  { title: "جلسات ثبت نام شده", link: "" },
-  { title: "گواهی نامه‌ها", link: "" },
-];
-
 const ThesisDetail = () => {
+  const { apiCall, loading } = UseApi();
+  const [thesis, setThesis] = useState<ThesisDetailType>(initThesis);
+
+  const onThesisDetailsSuccess = (res: any) => {
+    setThesis(thesisTransformer(res.data));
+  };
+
+  const studentDetails = () => {
+    apiCall({
+      url: UNIVERSITY_URL.THESIS + "/1",
+      method: "get",
+      successCallback: onThesisDetailsSuccess,
+    });
+  };
+
+  useEffect(() => {
+    studentDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <Header />
       <div>
-        <SideBar menuItems={studentPanelMenuItems}>
+        <SideBar menuItems={StudentMenuItem}>
           <Box>
-            <Typography variant="lg">جزئیات جلسه دفاع</Typography>
+            <Typography variant="lg">
+              <Localizer localeKey="THESIS_DETAILS_PAGE_TITLE" />
+            </Typography>
             <ContainerStyle>
               <BoxStyles>
-                <Typography variant="lg">عنوان:</Typography>
-                <Typography variant="md">
-                  مدل‌سازی تحلیل‌پذیر سکوی سیستم‌های بی‌درنگ بر اساس MARTE: یک
-                  مطالعه موردی در حوزه خودرو مدل‌سازی تحلیل‌پذیر سکوی سیستم‌های
-                  بی‌درنگ بر اساس MARTE: یک مطالعه موردی در حوزه خودرو
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_TITLE" />
                 </Typography>
+                <Typography variant="md">{thesis.title}</Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">عنوان انگلیسی:</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_EN_TITLE" />
+                </Typography>
                 <Typography variant="md">
                   Analyzable Platform Modeling of real-time systems using MARTE:
                   A case-study in the automotive domain Analyzable Platform
@@ -55,39 +80,57 @@ const ThesisDetail = () => {
                 </Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">دانشجو:</Typography>
-                <Typography variant="md">حسین رحیمی</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_STUDENT" />
+                </Typography>
+                <Typography variant="md">{thesis.student}</Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">استاد راهنما:</Typography>
-                <Typography variant="md">دکتر مهدی کارگهی</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_SUPERVISOR" />
+                </Typography>
+                <Typography variant="md">
+                  {thesis.supervisors.map((item) => item.id)}
+                </Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">گرایش:</Typography>
-                <Typography variant="md">نرم‌افزار</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_AREAS" />
+                </Typography>
+                <Typography variant="md">{thesis.area.title}</Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">تاریخ و مکان دفاع:</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_DATE_AND_PLACE" />
+                </Typography>
                 <Typography variant="md">
                   1402/1/1 ساعت 4:30 بعدازظهر اتاق جلسات 801
                 </Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">نماینده تحصیلات تکمیلی:</Typography>
-                <Typography variant="md">دکتر مهدی کارگهی</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_AGENT" />
+                </Typography>
+                <Typography variant="md">{thesis.agent.id}</Typography>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">تگ‌ها:</Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_TAGS" />
+                </Typography>
                 <Box display={"flex"} gap={2}>
-                  <CustomChip label="سیستم‌‌های نهفته" color="primary" />
-                  <CustomChip label="سامانه‌های سایبر فیزیکی" color="primary" />
-                  <CustomChip label="سامانه‌های سایبر فیزیکی" color="primary" />
-                  <CustomChip label="MARTE" color="primary" />
-                  <CustomChip label="مدلسازی" color="primary" />
+                  {thesis.tags.map((tag) => (
+                    <CustomChip
+                      key={tag.title}
+                      label={tag.title}
+                      color="primary"
+                    />
+                  ))}
                 </Box>
               </BoxStyles>
               <BoxStyles>
-                <Typography variant="lg">چکیده: </Typography>
+                <Typography variant="lg">
+                  <Localizer localeKey="THESIS_DETAILS_SUMMERY" />
+                </Typography>
                 <Typography variant="md">
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
                   با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و

@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import StudentDetails from "../pages/StudentDetails";
 import Thesises from "../pages/Thesis";
 import StudentsList from "../pages/StudentsList";
+import ThesisDetail from "../pages/ThesisDetail";
 
 export const Routing = () => {
   return (
@@ -22,6 +23,7 @@ export const Routing = () => {
           element={<StudentDetails />}
         />
         <Route path="/thesis" element={<Thesises />} />
+        <Route path="/thesis/:id" element={<ThesisDetail />} />
         <Route
           path="/"
           element={
