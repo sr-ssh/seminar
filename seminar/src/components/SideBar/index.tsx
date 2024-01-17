@@ -1,13 +1,13 @@
-import { Box, MenuItem, Typography, styled } from "@mui/material";
+import { Box, Button, MenuItem, Typography, styled } from "@mui/material";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { MenuItem as MenuItemType } from "../../hooks/useGlobalLocales/GlobalLocalesType";
 import { useNavigate } from "react-router-dom";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
+import { getCurrentURL } from "../../utils/getCurrentURL";
 
 interface Props {
   menuItems: MenuItemType[];
   children: ReactNode;
-  selectedIndex?: number;
 }
 
 const StyledBox = styled(Box)(({ theme }) => ({
@@ -44,13 +44,15 @@ const Menu = styled(MenuItem)(({ theme, selected }) => ({
     : { color: theme.palette.bulma.light }),
 }));
 
-export const SideBar: React.FC<Props> = ({
-  menuItems,
-  children,
-  selectedIndex = 0,
-}) => {
-  const [selectedItem, setSelectedItem] = useState(selectedIndex);
+const OnMenu = styled(Button)(({ theme }) => ({
+  marginTop: 4,
+  marginBottom: 4,
+  width: "fit-content",
+  backgroundColor: theme.palette.ghost.light,
+  color: theme.palette.piccolo.light,
+}));
 
+export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
   const navigate = useNavigate();
   return (
     <Box sx={{ display: "flex", width: "auto" }}>
@@ -58,18 +60,21 @@ export const SideBar: React.FC<Props> = ({
         <Typography variant="_md" marginBlockEnd={4}>
           <Localizer localeKey="SEMINAR" />
         </Typography>
-        {menuItems.map((menu, index) => (
-          <Menu
-            selected={index === selectedItem}
-            key={index}
-            onClick={() => {
-              setSelectedItem(index);
-              navigate(menu.link);
-            }}
-          >
-            {menu.title}
-          </Menu>
-        ))}
+        {menuItems.map((menu, index) => {
+          return (
+            <>
+              {getCurrentURL() === menu.link ? (
+                <OnMenu key={index} onClick={() => navigate(menu.link)}>
+                  {menu.title}
+                </OnMenu>
+              ) : (
+                <Menu key={index} onClick={() => navigate(menu.link)}>
+                  {menu.title}
+                </Menu>
+              )}
+            </>
+          );
+        })}
       </StyledBox>
       <Box
         sx={{

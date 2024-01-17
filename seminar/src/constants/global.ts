@@ -74,15 +74,26 @@ export const initProfessor = {
   university: 0,
 };
 
+export const initClass = {
+  id: 0,
+  code: "",
+  requiredThesis: [],
+  tags: [],
+  teacher: 0,
+  registrationType: 0,
+  university: 0,
+};
+
 export const initStudent = {
   id: 0,
   user: initUser,
   SID: 0,
   supervisorGrade: 0,
   teacherGrade: 0,
-  seminarClass: "",
+  seminarClass: initClass,
   area: initArea,
   supervisor: initProfessor,
+  entranceYear: "",
 };
 
 export const initThesis = {

@@ -54,7 +54,8 @@ export const globalLocales: GlobalLocalesType = {
   THESIS_UPLOADED_DOCS: "مدارک بارگذاری شده:",
   THESIS_MODAL_RESIGN: "انصراف از شرکت در جلسه",
   THESIS_MODAL_DESC_1: "آیا از انصراف دادن از شرکت در این جلسه اطمینان دارید؟",
-  THESIS_MODAL_DESC_2: "ممکن است به علت تکمیل شدن ظرفیت نتوانید دوباره در آن شرکت کنید",
+  THESIS_MODAL_DESC_2:
+    "ممکن است به علت تکمیل شدن ظرفیت نتوانید دوباره در آن شرکت کنید",
   THESIS_MODAL_YES: "بله",
   THESIS_MODAL_NO: "خیر",
   RECORDED_SESSIONS: "جلسات ثبت نام شده",
@@ -64,5 +65,11 @@ export const globalLocales: GlobalLocalesType = {
   STUDENT_DETAILS_EMAIL: 'پست الکترونیکی:',
 
   THESIS_LIST_TITLE: "لیست جلسات دفاع",
-  THESIS_SEARCH_PLACE_HOLDER: "جست‌وجو"
+  THESIS_SEARCH_PLACE_HOLDER: "جست‌وجو",
+
+  STUDENTS_LIST_TITLE: "لیست دانشجویان",
+  STUDENTS_LIST_GRID_STUDENT_NAME: "نام دانشجو",
+  STUDENTS_LIST_GRID_SID: "شماره دانشجویی",
+  STUDENTS_LIST_GRID_AREA: "گرایش",
+  STUDENTS_LIST_GRID_YEAR: "ورودی",
 };
