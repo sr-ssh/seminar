@@ -11,30 +11,30 @@ export const TeacherMenuItem: MenuItem[] = [
 
 export const columns: GridColDef[] = [
   {
-    field: "title",
-    headerName: convertLocale({ key: "DATA_GRID_TITLE_COLUMN" }).text,
+    field: "firstName",
+    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_STUDENT_NAME" }).text,
     flex: 1,
     align: "center",
     headerAlign: "center",
     headerClassName: "data-grid-header",
   },
   {
-    field: "student",
+    field: "SID",
     flex: 0.6,
-    headerName: convertLocale({ key: "DATA_GRID_STUDENT_COLUMN" }).text,
+    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_SID" }).text,
     align: "center",
     headerAlign: "center",
   },
   {
-    field: "supervisor",
+    field: "area",
     flex: 0.6,
-    headerName: convertLocale({ key: "DATA_GRID_SUPERVISOR_COLUMN" }).text,
+    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_AREA" }).text,
     align: "center",
     headerAlign: "center",
   },
   {
-    field: "createdAt",
-    headerName: convertLocale({ key: "DATA_GRID_DATE_COLUMN" }).text,
+    field: "entranceYear",
+    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_YEAR" }).text,
     type: "number",
     flex: 0.5,
     align: "center",

@@ -3,6 +3,7 @@ import { Professor } from "../../types/professor";
 import { User } from "../../types/user";
 import { Area } from "../../types/area";
 import { Agent } from "../../types/agent";
+import { Class } from "../../types/class";
 
 export const areaTransformer = (data: any) => {
   return {
@@ -21,6 +22,20 @@ export const agentTransformer = (data: any) => {
   } as Agent;
 };
 
+export const classTransformer = (data: any) => {
+  return {
+    id: data.id,
+    code: data.code,
+    requiredThesis: data.required_thesis.map((item: any) =>
+      thesisTransformer(item),
+    ),
+    tags: data.tags,
+    teacher: data.teacher,
+    registrationType: data.type_of_registration,
+    university: data.university,
+  } as Class;
+};
+
 export const studentTransformer = (data: any) => {
   return {
     id: data.id,
@@ -28,9 +43,10 @@ export const studentTransformer = (data: any) => {
     SID: data.number,
     supervisorGrade: data.supervisor_grade,
     teacherGrade: data.teacher_grade,
-    seminarClass: data.seminar_class,
+    seminarClass: classTransformer(data.seminar_class),
     area: areaTransformer(data.area),
     supervisor: professorTransformer(data.supervisor),
+    entranceYear: data.entrance_year,
   } as Student;
 };
 

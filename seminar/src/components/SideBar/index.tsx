@@ -3,6 +3,7 @@ import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { MenuItem } from "../../hooks/useGlobalLocales/GlobalLocalesType";
 import { useNavigate } from "react-router-dom";
 import { ReactNode } from "react";
+import { getCurrentURL } from "../../utils/getCurrentURL";
 
 interface Props {
   menuItems: MenuItem[];
@@ -37,6 +38,14 @@ const Menu = styled(Button)(({ theme }) => ({
   },
 }));
 
+const OnMenu = styled(Button)(({ theme }) => ({
+  marginTop: 4,
+  marginBottom: 4,
+  width: "fit-content",
+  backgroundColor: theme.palette.ghost.light,
+  color: theme.palette.piccolo.light,
+}));
+
 export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
   const navigate = useNavigate();
   return (
@@ -45,11 +54,21 @@ export const SideBar: React.FC<Props> = ({ menuItems, children }) => {
         <Typography variant="_md" marginBlockEnd={4}>
           <Localizer localeKey="SEMINAR" />
         </Typography>
-        {menuItems.map((menu, index) => (
-          <Menu key={index} onClick={() => navigate(menu.link)}>
-            {menu.title}
-          </Menu>
-        ))}
+        {menuItems.map((menu, index) => {
+          return (
+            <>
+              {getCurrentURL() === menu.link ? (
+                <OnMenu key={index} onClick={() => navigate(menu.link)}>
+                  {menu.title}
+                </OnMenu>
+              ) : (
+                <Menu key={index} onClick={() => navigate(menu.link)}>
+                  {menu.title}
+                </Menu>
+              )}
+            </>
+          );
+        })}
       </StyledBox>
       <Box
         sx={{
