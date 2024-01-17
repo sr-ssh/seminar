@@ -56,7 +56,7 @@ const Thesises = () => {
 
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
     apiCall({
-      url: `${UNIVERSITY_URL.THESIS}?title=${e.target.value}`,
+      url: `${UNIVERSITY_URL.THESIS_SEARCH}${e.target.value}`,
       method: "get",
       successCallback: onThesisSuccess,
     });

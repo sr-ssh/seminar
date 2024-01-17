@@ -33,6 +33,7 @@ export const UNIVERSITY_URL = {
   REGISTEREDTHESIS: UNIVERSITY_BASE + "/registeredThesis",
   SEMINAR_CLASS: UNIVERSITY_BASE + "/seminar_class",
   THESIS: UNIVERSITY_BASE + "/thesis",
+  THESIS_SEARCH: UNIVERSITY_BASE + "/thesis?title__icontains=",
   UNIVERSITY: UNIVERSITY_BASE + "/university",
 };
 
