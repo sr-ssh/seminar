@@ -83,4 +83,10 @@ export const globalLocales: GlobalLocalesType = {
   STUDENTS_LIST_GRID_SID: "شماره دانشجویی",
   STUDENTS_LIST_GRID_AREA: "گرایش",
   STUDENTS_LIST_GRID_YEAR: "ورودی",
+
+  SELECT_SEMINAR_SUBMIT: "اعمال",
+  SELECT_SEMINAR_SUPERVISOR_PLACEHOLDER: "انتخاب کنید",
+  SELECT_SEMINAR_CLASS_PLACEHOLDER: "انتخاب کنید",
+  SELECT_SEMINAR_SUPERVISOR_LABEL: "استاد راهنما",
+  SELECT_SEMINAR_CLASS_LABEL: "کلاس درس سمینار",
 };

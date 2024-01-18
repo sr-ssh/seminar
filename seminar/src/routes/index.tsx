@@ -9,6 +9,7 @@ import StudentDetails from "../pages/StudentDetails";
 import Thesises from "../pages/Thesis";
 import StudentsList from "../pages/StudentsList";
 import ThesisDetail from "../pages/ThesisDetail";
+import SelectSeminar from "../pages/SelectSeminar";
 
 export const Routing = () => {
   return (
@@ -22,6 +23,7 @@ export const Routing = () => {
           path="/student-details/:studentId"
           element={<StudentDetails />}
         />
+        <Route path="/select-seminar" element={<SelectSeminar />} />
         <Route path="/thesis" element={<Thesises />} />
         <Route path="/thesis/:id" element={<ThesisDetail />} />
         <Route

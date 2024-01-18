@@ -113,7 +113,7 @@ export const initThesis = {
 };
 
 export const StudentMenuItem: MenuItem[] = [
-  { title: "انتخاب استاد راهنما و کلاس سمینار", link: "" },
+  { title: "انتخاب استاد راهنما و کلاس سمینار", link: "/select-seminar" },
   { title: "جلسات دفاع", link: "/thesis" },
   { title: "جلسات ثبت نام شده", link: "" },
   { title: "گواهی نامه‌ها", link: "" },
