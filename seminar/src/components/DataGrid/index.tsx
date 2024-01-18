@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid";
 import { styled } from "@mui/material";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 import PaginationRounded from "../Pagination";
@@ -148,6 +148,7 @@ interface Props {
   loading?: boolean;
   numberOfPages?: number;
   currentPage?: number;
+  onRowClick?: (e: GridRowParams<any>) => void;
 }
 
 export const CustomDataGrid: React.FC<Props> = ({
@@ -156,6 +157,7 @@ export const CustomDataGrid: React.FC<Props> = ({
   loading = false,
   numberOfPages = 0,
   currentPage,
+  onRowClick,
 }) => {
   return (
     <Box sx={{ height: "auto", width: "100%" }}>
@@ -182,6 +184,7 @@ export const CustomDataGrid: React.FC<Props> = ({
         rowHeight={56}
         loading={loading}
         disableRowSelectionOnClick
+        onRowClick={onRowClick}
       />
     </Box>
   );

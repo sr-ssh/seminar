@@ -21,6 +21,7 @@ import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { TextInput } from "../../components/TextInput";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 import { Thesis } from "../../types/thesis";
+import { useNavigate } from "react-router";
 
 const ContainerStyle = styled(Container)({
   textAlign: "start",
@@ -31,6 +32,7 @@ const ContainerStyle = styled(Container)({
 
 const Thesises = () => {
   const { apiCall, loading } = UseApi();
+  const navigate = useNavigate();
   const [data, setData] = useState<{
     data: Thesis[];
     count?: number;
@@ -124,6 +126,7 @@ const Thesises = () => {
             loading={loading}
             numberOfPages={data.numberOfPages}
             currentPage={data.count}
+            onRowClick={(e) => navigate(e.id.toString())}
           />
         </ContainerStyle>
       </SideBar>

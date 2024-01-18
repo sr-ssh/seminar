@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import UseApi from "../../hooks/useApi";
 import { ThesisDetailType } from "../../types/thesis";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
+import { useParams } from "react-router";
 
 const ContainerStyle = styled(Box)({
   display: "flex",
@@ -32,6 +33,7 @@ const BoxStyles = styled(Box)({
 });
 
 const ThesisDetail = () => {
+  const { id } = useParams();
   const { apiCall, loading } = UseApi();
   const [thesis, setThesis] = useState<ThesisDetailType>(initThesis);
 
@@ -41,7 +43,7 @@ const ThesisDetail = () => {
 
   const studentDetails = () => {
     apiCall({
-      url: UNIVERSITY_URL.THESIS + "/1",
+      url: UNIVERSITY_URL.THESIS + `/${id}`,
       method: "get",
       successCallback: onThesisDetailsSuccess,
     });
