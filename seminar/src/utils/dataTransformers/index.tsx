@@ -111,3 +111,10 @@ export const getThesisTransformer = (data: GetUniversityThesisResponse) => {
     data: data.data.map((item) => thesisTransformer(item)),
   };
 };
+
+export const selectProfessorTransformer = (data: any) => {
+  return {
+    id: data.id,
+    user: userTransformer(data.user).lastName,
+  };
+};

@@ -1,14 +1,12 @@
 import { Container, styled } from "@mui/system";
 import { SideBar } from "../../components/SideBar";
 import { StudentMenuItem } from "../../constants/global";
-import { Autocomplete, Box, FormControl } from "@mui/material";
+import { Box, FormControl } from "@mui/material";
 import LoadingButton from "../../components/LoadingButton";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
-import { Label } from "../../components/Label";
 import BasicSelect from "../../components/Signup/Select";
 import { useForm } from "react-hook-form";
-import { TextInput } from "../../components/TextInput";
-import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
+import SupervisorSelect from "./components/SupervisorSelect";
 
 const BoxStyle = styled(Box)({
   display: "flex",
@@ -32,32 +30,7 @@ const SelectSeminar = () => {
       <ContainerStyle>
         <BoxStyle flexDirection={"column"} alignItems={"center"}>
           <BoxStyle width={600}>
-            <FormControl variant="standard" sx={{ flex: 1 }}>
-              <Label htmlFor="supervisor">
-                <Localizer localeKey="SELECT_SEMINAR_SUPERVISOR_LABEL" />
-              </Label>
-              <Autocomplete
-                disablePortal
-                id="supervisor"
-                options={[]}
-                sx={{
-                  marginBlockStart: "6px",
-                  ".MuiOutlinedInput-root": { borderRadius: 2 },
-                  ".MuiAutocomplete-endAdornment": { zIndex: 1 },
-                  ".MuiOutlinedInput-input": { height: ".8rem" },
-                }}
-                renderInput={(params) => (
-                  <TextInput
-                    {...params}
-                    placeholder={
-                      convertLocale({
-                        key: "SELECT_SEMINAR_SUPERVISOR_PLACEHOLDER",
-                      }).text
-                    }
-                  />
-                )}
-              />
-            </FormControl>
+            <SupervisorSelect />
             <FormControl variant="standard" sx={{ flex: 1 }}>
               <BasicSelect
                 labelLocalKey="SELECT_SEMINAR_CLASS_LABEL"
