@@ -14,36 +14,37 @@ import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import UseApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
-import { Student } from "../../types/student";
-import { studentTransformer } from "../../utils/dataTransformers";
-import { ACCOUNT_URL, initStudent } from "../../constants/global";
-import { useNavigate } from "react-router-dom";
 
-const StudentsList = () => {
+import { classTransformer } from "../../utils/dataTransformers";
+import { UNIVERSITY_URL, initClass } from "../../constants/global";
+import { useNavigate } from "react-router-dom";
+import { Class } from "../../types/class";
+
+const ClassLists = () => {
   const { apiCall, loading } = UseApi();
   const navigate = useNavigate();
   const [data, setData] = useState<{
-    students: Student[];
+    classes: Class[];
     count?: number;
     numberOfPages?: number;
   }>({
-    students: [initStudent],
+    classes: [initClass],
     count: 0,
     numberOfPages: 0,
   });
-  const [filteredStudents, setFilteredStudents] = useState([
+  const [filteredClasses, setFilteredClasses] = useState([
     {
       id: 1,
-      firstName: "",
-      SID: 0,
+      className: "",
+      members: 0,
       area: "",
       entranceYear: "",
     },
   ]);
 
-  const onStudentsListSuccess = (res: any) => {
+  const onClassesListSuccess = (res: any) => {
     setData({
-      students: res.data.data.map((item: any) => studentTransformer(item)),
+      classes: res.data.data.map((item: any) => classTransformer(item)),
       count: res.data?.count,
       numberOfPages: res.data.num_of_pages,
     });
@@ -51,40 +52,40 @@ const StudentsList = () => {
 
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
     apiCall({
-      url: `${ACCOUNT_URL.STUDENTS}/${e.target.value}`,
+      url: `${UNIVERSITY_URL.SEMINAR_CLASS}/${e.target.value}`,
       method: "get",
-      successCallback: onStudentsListSuccess,
+      successCallback: onClassesListSuccess,
     });
   };
 
-  const studentsList = () => {
+  const classesList = () => {
     apiCall({
-      url: ACCOUNT_URL.STUDENTS,
+      url: UNIVERSITY_URL.SEMINAR_CLASS,
       method: "get",
-      successCallback: onStudentsListSuccess,
+      successCallback: onClassesListSuccess,
     });
   };
 
   useEffect(() => {
-    studentsList();
+    classesList();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (data.students) {
-      const filterStudents = data.students?.map((item) => {
+    if (data.classes) {
+      const filterClasses = data.classes?.map((item) => {
         return {
           id: item.id,
-          firstName: item.user.firstName,
-          SID: item.SID,
-          area: item.area.title,
-          entranceYear: item.entranceYear,
+          className: item.code,
+          members: item.tags.length,
+          area: item.code,
+          entranceYear: item.code,
         };
       });
-      setFilteredStudents(filterStudents);
+      setFilteredClasses(filterClasses);
     }
-  }, [data.students]);
+  }, [data.classes]);
 
   const ContainerStyle = styled(Container)({
     textAlign: "start",
@@ -97,7 +98,7 @@ const StudentsList = () => {
     <SideBar menuItems={TeacherMenuItem}>
       <ContainerStyle>
         <Typography variant="lg" sx={{ textAlign: "start" }}>
-          <Localizer localeKey="RECORDED_SESSIONS" />
+          <Localizer localeKey="THESIS_LIST_TITLE" />
         </Typography>
         <Box>
           <TextInput
@@ -120,7 +121,7 @@ const StudentsList = () => {
         </Box>
         <CustomDataGrid
           columns={columns}
-          rows={filteredStudents}
+          rows={filteredClasses}
           onRowClick={(e) => navigate(e.id.toString())}
           loading={loading}
           numberOfPages={data.numberOfPages}
@@ -131,4 +132,4 @@ const StudentsList = () => {
   );
 };
 
-export default StudentsList;
+export default ClassLists;
