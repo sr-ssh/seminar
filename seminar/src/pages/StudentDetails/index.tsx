@@ -18,10 +18,21 @@ import {
   initThesis,
 } from "../../constants/global";
 import { Thesis } from "../../types/thesis";
+import { useParams } from "react-router-dom";
+
 const StudentDetails = () => {
+  const { studentId } = useParams();
   const { apiCall, loading } = UseApi();
   const [student, setStudent] = useState<Student>(initStudent);
-  const [thesis, setThesis] = useState<Thesis[]>([initThesis]);
+  const [data, setData] = useState<{
+    thesis: Thesis[];
+    count?: number;
+    numberOfPages?: number;
+  }>({
+    thesis: [initThesis],
+    count: 0,
+    numberOfPages: 0,
+  });
   const [filteredThesis, setFilteredThesis] = useState([
     {
       id: 1,
@@ -36,12 +47,16 @@ const StudentDetails = () => {
     setStudent(studentTransformer(res.data));
   };
   const onThesisSuccess = (res: any) => {
-    setThesis(res.data.data.map((theses: any) => thesisTransformer(theses)));
+    setData({
+      thesis: res.data.data.map((theses: any) => thesisTransformer(theses)),
+      count: res.data?.count,
+      numberOfPages: res.data.num_of_pages,
+    });
   };
 
   const studentDetails = () => {
     apiCall({
-      url: ACCOUNT_URL.STUDENT_DETAILS + "/1",
+      url: ACCOUNT_URL.STUDENT_DETAILS + `/${studentId}`,
       method: "get",
       successCallback: onStudentDetailsSuccess,
     });
@@ -62,36 +77,40 @@ const StudentDetails = () => {
   }, []);
 
   useEffect(() => {
-    if (thesis) {
-      const filterThesis = thesis?.map((item) => {
+    if (data.thesis) {
+      const filterThesis = data.thesis?.map((item) => {
         return {
           id: item.id,
           title: item.title,
           student: item.student,
           supervisor: item.supervisors[0]?.user.firstName,
-          createdAt: item.createdAt,
+          createdAt: new Intl.DateTimeFormat("fa-IR").format(
+            new Date(item.createdAt || Date.now()),
+          ),
         };
       });
       setFilteredThesis(filterThesis);
     }
-  }, [thesis]);
+  }, [data.thesis]);
 
   return (
-    <>
-      {!loading && (
-        <SideBar menuItems={TeacherMenuItem}>
-          <Container>
-            <StudentDetail student={student} />
-            <Box sx={{ marginY: 5 }}>
-              <Typography variant="lg" sx={{ textAlign: "start" }}>
-                <Localizer localeKey="RECORDED_SESSIONS" />
-              </Typography>
-            </Box>
-            <CustomDataGrid columns={columns} rows={filteredThesis} />
-          </Container>
-        </SideBar>
-      )}
-    </>
+    <SideBar menuItems={TeacherMenuItem}>
+      <Container>
+        <StudentDetail student={student} />
+        <Box sx={{ marginY: 5 }}>
+          <Typography variant="lg" sx={{ textAlign: "start" }}>
+            <Localizer localeKey="RECORDED_SESSIONS" />
+          </Typography>
+        </Box>
+        <CustomDataGrid
+          columns={columns}
+          rows={filteredThesis}
+          loading={loading}
+          numberOfPages={data.numberOfPages}
+          currentPage={data.count}
+        />
+      </Container>
+    </SideBar>
   );
 };
 

@@ -19,10 +19,7 @@ export const Routing = () => {
         <Route path="/register" element={<SignUp />} />
         <Route path="/otp" element={<EmailOTP />} />
         <Route path="students" element={<StudentsList />} />
-        <Route
-          path="/student-details/:studentId"
-          element={<StudentDetails />}
-        />
+        <Route path="/students/:studentId" element={<StudentDetails />} />
         <Route path="/select-seminar" element={<SelectSeminar />} />
         <Route path="/thesis" element={<Thesises />} />
         <Route path="/thesis/:id" element={<ThesisDetail />} />
