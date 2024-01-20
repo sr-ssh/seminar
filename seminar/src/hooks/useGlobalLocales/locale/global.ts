@@ -39,6 +39,7 @@ export const globalLocales: GlobalLocalesType = {
   DATA_GRID_STUDENT_COLUMN: "دانشجو",
   DATA_GRID_SUPERVISOR_COLUMN: "استاد راهنما",
   DATA_GRID_DATE_COLUMN: "تاریخ",
+  DATA_GRID_STATUS: "وضعیت",
 
   TEACHER_MENU_STUDENTS: "دانشجویان ",
   TEACHER_MENU_CLASSES: "کلاسها",
@@ -89,4 +90,7 @@ export const globalLocales: GlobalLocalesType = {
   SELECT_SEMINAR_CLASS_PLACEHOLDER: "انتخاب کنید",
   SELECT_SEMINAR_SUPERVISOR_LABEL: "استاد راهنما",
   SELECT_SEMINAR_CLASS_LABEL: "کلاس درس سمینار",
+
+  REGISTERED_THESIS_TITLE: "لیست جلسات ثبت نام شده",
+
 };

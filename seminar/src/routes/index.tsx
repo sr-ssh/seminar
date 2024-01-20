@@ -10,6 +10,7 @@ import Thesises from "../pages/Thesis";
 import StudentsList from "../pages/StudentsList";
 import ThesisDetail from "../pages/ThesisDetail";
 import SelectSeminar from "../pages/SelectSeminar";
+import RegisteredThesis from "../pages/RegisteredThesis";
 
 export const Routing = () => {
   return (
@@ -23,14 +24,7 @@ export const Routing = () => {
         <Route path="/select-seminar" element={<SelectSeminar />} />
         <Route path="/thesis" element={<Thesises />} />
         <Route path="/thesis/:id" element={<ThesisDetail />} />
-        <Route
-          path="/"
-          element={
-            <Box sx={{ paddingBlockStart: 4, backgroundColor: "goku.light" }}>
-              <CustomDataGrid columns={[]} rows={undefined} />
-            </Box>
-          }
-        />
+        <Route path="/registered-thesis" element={<RegisteredThesis />} />
       </Routes>
     </BrowserRouter>
   );
