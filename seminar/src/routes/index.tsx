@@ -1,9 +1,6 @@
-import { Box } from "@mui/material";
 import EmailOTP from "../pages/EmailOTP";
 import SignUp from "../pages/Signup";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CustomDataGrid } from "../components/DataGrid";
 import Login from "../pages/Login";
 import StudentDetails from "../pages/StudentDetails";
 import Thesises from "../pages/Thesis";
@@ -11,20 +8,33 @@ import StudentsList from "../pages/StudentsList";
 import ThesisDetail from "../pages/ThesisDetail";
 import SelectSeminar from "../pages/SelectSeminar";
 import RegisteredThesis from "../pages/RegisteredThesis";
+import { useSelector } from "react-redux";
+import { userSelectors } from "../store/user/selector";
 
 export const Routing = () => {
+  const userType = useSelector(userSelectors.user).type;
+  console.log(userType);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
         <Route path="/otp" element={<EmailOTP />} />
-        <Route path="students" element={<StudentsList />} />
-        <Route path="/students/:studentId" element={<StudentDetails />} />
-        <Route path="/select-seminar" element={<SelectSeminar />} />
-        <Route path="/thesis" element={<Thesises />} />
-        <Route path="/thesis/:id" element={<ThesisDetail />} />
-        <Route path="/registered-thesis" element={<RegisteredThesis />} />
+        {userType === 2 && (
+          <>
+            <Route path="students" element={<StudentsList />} />
+            <Route path="/students/:studentId" element={<StudentDetails />} />
+          </>
+        )}
+        {userType === 1 && (
+          <>
+            <Route path="/" element={<SelectSeminar />} />
+            <Route path="/thesis" element={<Thesises />} />
+            <Route path="/thesis/:id" element={<ThesisDetail />} />
+            <Route path="/registered-thesis" element={<RegisteredThesis />} />
+          </>
+        )}
       </Routes>
     </BrowserRouter>
   );
