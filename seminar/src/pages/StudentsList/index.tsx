@@ -45,7 +45,7 @@ const StudentsList = () => {
     setData({
       students: res.data.data.map((item: any) => studentTransformer(item)),
       count: res.data?.count,
-      numberOfPages: res.data.num_of_pages,
+      numberOfPages: res.data?.num_of_pages,
     });
   };
 
@@ -84,7 +84,7 @@ const StudentsList = () => {
       });
       setFilteredStudents(filterStudents);
     }
-  }, [data.students]);
+  }, [data]);
 
   const ContainerStyle = styled(Container)({
     textAlign: "start",

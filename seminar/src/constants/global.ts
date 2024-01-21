@@ -39,6 +39,12 @@ export const UNIVERSITY_URL = {
   UNIVERSITY: UNIVERSITY_BASE + "/university",
 };
 
+export const initUniversity = {
+  id: 0,
+  country: 0,
+  title: "",
+};
+
 export const initArea = {
   field: 0,
   id: 0,
@@ -73,7 +79,7 @@ export const initProfessor = {
   id: 0,
   createdAt: "",
   user: initUser,
-  university: 0,
+  university: initUniversity,
 };
 
 export const initClass = {
