@@ -115,6 +115,13 @@ export const getThesisTransformer = (data: GetUniversityThesisResponse) => {
 export const selectProfessorTransformer = (data: any) => {
   return {
     id: data.id,
-    user: userTransformer(data.user).lastName,
+    label: userTransformer(data.user).lastName,
+  };
+};
+
+export const selectSeminarClassTransformer = (data: any) => {
+  return {
+    id: data.id,
+    label: data.code,
   };
 };

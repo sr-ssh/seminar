@@ -33,6 +33,7 @@ export const UNIVERSITY_URL = {
   PROFESSOR_BY_NAME: UNIVERSITY_BASE + "/professor?user__last_name__icontains=",
   REGISTEREDTHESIS: UNIVERSITY_BASE + "/registeredThesis",
   SEMINAR_CLASS: UNIVERSITY_BASE + "/seminar_class",
+  SEMINAR_CLASS_BY_CODE: UNIVERSITY_BASE + "/seminar_class?code=",
   THESIS: UNIVERSITY_BASE + "/thesis",
   THESIS_SEARCH: UNIVERSITY_BASE + "/thesis?title__icontains=",
   UNIVERSITY: UNIVERSITY_BASE + "/university",

@@ -29,7 +29,7 @@ export const Routing = () => {
             <Route path="classes" element={<ClassLists />} />
           </>
         )}
-        {userType === 0 && (
+        {userType === 1 && (
           <>
             <Route path="/" element={<SelectSeminar />} />
             <Route path="/thesis" element={<Thesises />} />
