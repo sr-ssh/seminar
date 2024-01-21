@@ -85,7 +85,7 @@ export const globalLocales: GlobalLocalesType = {
   STUDENTS_LIST_GRID_AREA: "گرایش",
   STUDENTS_LIST_GRID_YEAR: "ورودی",
 
-  CLASS_LIST_GRID_CLASSNAME: "عنوان کلاس",
+  CLASS_LIST_GRID_CLASS_NAME: "عنوان کلاس",
   CLASS_LIST_GRID_MEMBERS: "تعداد اعضا",
   CLASS_LIST_GRID_AREA: "گرایش",
   CLASS_LIST_GRID_ENTRANCE_YEAR: "سال",
