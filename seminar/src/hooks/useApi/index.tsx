@@ -1,11 +1,12 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { userSelectors } from "../../store/user/selector";
 import { userClear } from "../../store/user";
+import { getNonAuthorizedApis } from "../../utils/getNonAuthorizedApis";
 
 interface UseApiReturnType {
   loading: boolean;
@@ -25,6 +26,7 @@ const UseApi = (): UseApiReturnType => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector(userSelectors.token);
+  const { pathname } = useLocation();
 
   const apiCall = ({
     url,
@@ -44,7 +46,7 @@ const UseApi = (): UseApiReturnType => {
     } else {
       axiosOptions.params = params;
     }
-    if (token && token.accessToken) {
+    if (token && token.accessToken && !getNonAuthorizedApis(url)) {
       axiosOptions.headers = {
         Authorization: "Bearer " + token.accessToken,
       };
@@ -57,8 +59,10 @@ const UseApi = (): UseApiReturnType => {
       .catch(function (error) {
         // handle error
         if (error?.response?.status === 401) {
-          navigate("/login");
-          dispatch(userClear());
+          if (pathname !== "/register" && pathname !== "/otp") {
+            navigate("/login");
+            dispatch(userClear());
+          }
         }
         if (error?.response?.data?.data) {
           toast(error?.response?.data?.data);

@@ -30,6 +30,7 @@ const UNIVERSITY_BASE = BASE_URL + "/university";
 export const UNIVERSITY_URL = {
   COUNTRY: UNIVERSITY_BASE + "/country",
   PROFESSOR: UNIVERSITY_BASE + "/professor",
+  PROFESSOR_BY_NAME: UNIVERSITY_BASE + "/professor?user__last_name__icontains=",
   REGISTEREDTHESIS: UNIVERSITY_BASE + "/registeredThesis",
   SEMINAR_CLASS: UNIVERSITY_BASE + "/seminar_class",
   THESIS: UNIVERSITY_BASE + "/thesis",
