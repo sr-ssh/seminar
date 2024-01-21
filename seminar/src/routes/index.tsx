@@ -10,6 +10,7 @@ import SelectSeminar from "../pages/SelectSeminar";
 import RegisteredThesis from "../pages/RegisteredThesis";
 import { useSelector } from "react-redux";
 import { userSelectors } from "../store/user/selector";
+import ClassLists from "../pages/SeminarClasses";
 
 export const Routing = () => {
   const userType = useSelector(userSelectors.user).type;
@@ -25,6 +26,7 @@ export const Routing = () => {
           <>
             <Route path="students" element={<StudentsList />} />
             <Route path="/students/:studentId" element={<StudentDetails />} />
+            <Route path="classes" element={<ClassLists />} />
           </>
         )}
         {userType === 0 && (

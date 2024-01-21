@@ -4,7 +4,7 @@ import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 
 export const TeacherMenuItem: MenuItem[] = [
   { title: "دانشجویان", link: "/students" },
-  { title: "کلاسها", link: "" },
+  { title: "کلاسها", link: "/classes" },
   { title: "نمایندگی تحصیلات تکمیلی", link: "" },
   { title: "درخواست‌ها", link: "" },
 ];

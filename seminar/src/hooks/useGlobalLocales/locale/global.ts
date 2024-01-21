@@ -63,7 +63,7 @@ export const globalLocales: GlobalLocalesType = {
   STUDENT_DETAILS_SID: "شماره دانشجویی:",
   STUDENT_DETAILS_SUPERVISOR: "استاد راهنما:",
   STUDENT_DETAILS_FIELD: "گرایش:",
-  STUDENT_DETAILS_EMAIL: 'پست الکترونیکی:',
+  STUDENT_DETAILS_EMAIL: "پست الکترونیکی:",
 
   THESIS_LIST_TITLE: "لیست جلسات دفاع",
   THESIS_SEARCH_PLACE_HOLDER: "جست‌وجو",
@@ -85,6 +85,11 @@ export const globalLocales: GlobalLocalesType = {
   STUDENTS_LIST_GRID_AREA: "گرایش",
   STUDENTS_LIST_GRID_YEAR: "ورودی",
 
+  CLASS_LIST_GRID_CLASS_NAME: "عنوان کلاس",
+  CLASS_LIST_GRID_MEMBERS: "تعداد اعضا",
+  CLASS_LIST_GRID_AREA: "گرایش",
+  CLASS_LIST_GRID_ENTRANCE_YEAR: "سال",
+
   SELECT_SEMINAR_SUBMIT: "اعمال",
   SELECT_SEMINAR_SUPERVISOR_PLACEHOLDER: "انتخاب کنید",
   SELECT_SEMINAR_CLASS_PLACEHOLDER: "انتخاب کنید",
@@ -92,5 +97,4 @@ export const globalLocales: GlobalLocalesType = {
   SELECT_SEMINAR_CLASS_LABEL: "کلاس درس سمینار",
 
   REGISTERED_THESIS_TITLE: "لیست جلسات ثبت نام شده",
-
 };
