@@ -1,4 +1,4 @@
-import { Box, Container, Typography, styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import CustomChip from "../../components/Chip";
 import ThesisForm from "./components/Form";
 import { SideBar } from "../../components/SideBar";
