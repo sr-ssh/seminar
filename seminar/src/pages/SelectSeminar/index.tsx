@@ -7,6 +7,7 @@ import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import BasicSelect from "../../components/Signup/Select";
 import { useForm } from "react-hook-form";
 import SupervisorSelect from "./components/SupervisorSelect";
+import SeminarClass from "./components/SeminarClass";
 
 const BoxStyle = styled(Box)({
   display: "flex",
@@ -31,14 +32,7 @@ const SelectSeminar = () => {
         <BoxStyle flexDirection={"column"} alignItems={"center"}>
           <BoxStyle width={600}>
             <SupervisorSelect />
-            <FormControl variant="standard" sx={{ flex: 1 }}>
-              <BasicSelect
-                labelLocalKey="SELECT_SEMINAR_CLASS_LABEL"
-                placeHolder="SELECT_SEMINAR_CLASS_PLACEHOLDER"
-                options={[]}
-                onChange={(e) => setValue("classes", e.target.value)}
-              />
-            </FormControl>
+            <SeminarClass />
           </BoxStyle>
           <LoadingButton
             onSubmit={() => console.log("first")}

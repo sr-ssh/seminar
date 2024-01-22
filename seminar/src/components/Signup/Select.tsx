@@ -25,6 +25,7 @@ const BasicSelect = ({
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
+    console.log(event.target);
     onChange(event as any);
   };
 
@@ -54,11 +55,14 @@ const BasicSelect = ({
             <Localizer localeKey={placeHolder} />
           </em>
         </MenuItem>
-        {options?.map((item) => (
+        {/* {options?.map((item) => (
           <MenuItem key={item.id} value={item.id}>
             {item.title}
           </MenuItem>
-        ))}
+        ))} */}
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
       </CustomSelect>
     </FormControl>
   );
