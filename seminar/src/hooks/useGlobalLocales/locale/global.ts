@@ -90,6 +90,12 @@ export const globalLocales: GlobalLocalesType = {
   CLASS_LIST_GRID_AREA: "گرایش",
   CLASS_LIST_GRID_ENTRANCE_YEAR: "سال",
 
+  CLASS_DETAILS_TITLE: 'لیست دانشجویان کلاس',
+  CLASS_DETAILS_STUDENT_NAME: "نام دانشجو",
+  CLASS_DETAILS_SID: "شماره دانشجویی",
+  CLASS_DETAILS_AREA: "گرایش",
+  CLASS_DETAILS_ENTRANCE_YEAR: "ورودی",
+
   SELECT_SEMINAR_SUBMIT: "اعمال",
   SELECT_SEMINAR_SUPERVISOR_PLACEHOLDER: "انتخاب کنید",
   SELECT_SEMINAR_CLASS_PLACEHOLDER: "انتخاب کنید",

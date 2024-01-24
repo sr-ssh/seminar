@@ -7,22 +7,32 @@ import {
   styled,
 } from "@mui/material";
 import { SideBar } from "../../components/SideBar";
-import { TeacherMenuItem, columns } from "./constants";
+import { TRANSLATIONS, TeacherMenuItem, columns } from "./constants";
 import { CustomDataGrid } from "../../components/DataGrid";
 import { TextInput } from "../../components/TextInput";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
-import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
+
 import UseApi from "../../hooks/useApi";
 import { useEffect, useState } from "react";
+
+import {
+  ACCOUNT_URL,
+  UNIVERSITY_URL,
+  initClass,
+  initStudent,
+} from "../../constants/global";
+import { useNavigate, useParams } from "react-router-dom";
+import { toFa } from "../../utils/numbers/numbers";
 import { Student } from "../../types/student";
 import { studentTransformer } from "../../utils/dataTransformers";
-import { ACCOUNT_URL, initStudent } from "../../constants/global";
-import { useNavigate } from "react-router-dom";
-import { toFa } from "../../utils/numbers/numbers";
+import { Class } from "../../types/class";
 
-const StudentsList = () => {
+const ClassDetails = () => {
+  const { classId } = useParams();
   const { apiCall, loading } = UseApi();
   const navigate = useNavigate();
+  const [inputState, setInputState] = useState("");
+  const [classDetail, setClassDetail] = useState<Class>(initClass);
   const [data, setData] = useState<{
     students: Student[];
     count?: number;
@@ -35,7 +45,7 @@ const StudentsList = () => {
   const [filteredStudents, setFilteredStudents] = useState([
     {
       id: 1,
-      firstName: "",
+      name: "",
       SID: "",
       area: "",
       entranceYear: "",
@@ -50,24 +60,41 @@ const StudentsList = () => {
     });
   };
 
-  const search = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const searchRequest = (studentId: string) => {
     apiCall({
-      url: `${ACCOUNT_URL.STUDENTS}/${e.target.value}`,
+      url: `${ACCOUNT_URL.STUDENTS}/${studentId}`,
       method: "get",
       successCallback: onStudentsListSuccess,
     });
   };
 
-  const studentsList = () => {
+  const search = (e: any) => {
+    if (e.code === "Enter") searchRequest(inputState);
+  };
+
+  const studentList = () => {
     apiCall({
-      url: ACCOUNT_URL.STUDENTS,
+      url: ACCOUNT_URL.STUDENTS + `?/seminar_class/${classId}`,
       method: "get",
       successCallback: onStudentsListSuccess,
+    });
+  };
+
+  const onClassDetailsSuccess = (res: any) => {
+    setClassDetail(res.data);
+  };
+
+  const classDetails = () => {
+    apiCall({
+      url: UNIVERSITY_URL.SEMINAR_CLASS + `/${classId}`,
+      method: "get",
+      successCallback: onClassDetailsSuccess,
     });
   };
 
   useEffect(() => {
-    studentsList();
+    classDetails();
+    studentList();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,7 +104,7 @@ const StudentsList = () => {
       const filterStudents = data.students?.map((item) => {
         return {
           id: item.id,
-          firstName: item.user.firstName,
+          name: item.user.firstName,
           SID: toFa(item.SID) || "",
           area: item.area.title,
           entranceYear: toFa(item.entranceYear) || "",
@@ -97,8 +124,8 @@ const StudentsList = () => {
   return (
     <SideBar menuItems={TeacherMenuItem}>
       <ContainerStyle>
-        <Typography variant="lg" sx={{ textAlign: "start" }}>
-          <Localizer localeKey="RECORDED_SESSIONS" />
+        <Typography variant="lg" sx={{ textAlign: "start", display: "flex" }}>
+          <p>{TRANSLATIONS.pageTitle(classDetail?.title, classDetail?.code)}</p>
         </Typography>
         <Box>
           <TextInput
@@ -107,12 +134,16 @@ const StudentsList = () => {
             }
             type="text"
             sx={{ width: "65%" }}
-            onChange={search}
+            value={inputState}
+            onChange={(e) => {
+              setInputState(e.target.value);
+            }}
+            onKeyUp={search}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <ButtonBase>
-                    <img src="assets/images/search.svg" alt="search" />
+                    <img src="/assets/images/search.svg" alt="search" />
                   </ButtonBase>
                 </InputAdornment>
               ),
@@ -122,7 +153,7 @@ const StudentsList = () => {
         <CustomDataGrid
           columns={columns}
           rows={filteredStudents}
-          onRowClick={(e) => navigate(e.id.toString())}
+          onRowClick={(e) => navigate(`/students/${e.id.toString()}`)}
           loading={loading}
           numberOfPages={data.numberOfPages}
           currentPage={data.count}
@@ -132,4 +163,4 @@ const StudentsList = () => {
   );
 };
 
-export default StudentsList;
+export default ClassDetails;

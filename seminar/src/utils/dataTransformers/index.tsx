@@ -42,6 +42,10 @@ export const classTransformer = (data: any) => {
     teacher: data?.teacher,
     registrationType: data?.type_of_registration,
     university: data?.university,
+    area: areaTransformer(data?.area),
+    membersCount: data?.members_count,
+    title: data?.title,
+    year: data?.year,
   } as Class;
 };
 

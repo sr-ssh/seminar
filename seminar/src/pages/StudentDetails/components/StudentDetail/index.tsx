@@ -1,6 +1,7 @@
 import { Avatar, Box, Typography, styled } from "@mui/material";
 import { Localizer } from "../../../../hooks/useGlobalLocales/Localizer";
 import { Student } from "../../../../types/student";
+import { toFa } from "../../../../utils/numbers/numbers";
 
 interface Props {
   student: Student;
@@ -32,7 +33,7 @@ export const StudentDetail: React.FC<Props> = ({ student }) => {
           <Typography variant="lg" sx={{ marginBottom: "12px" }}>
             <Localizer localeKey="STUDENT_DETAILS_SID" />
           </Typography>
-          <Typography variant="md">{student.SID}</Typography>
+          <Typography variant="md">{toFa(student.SID)}</Typography>
         </DetailsStyle>
         <DetailsStyle
           sx={{
@@ -43,7 +44,7 @@ export const StudentDetail: React.FC<Props> = ({ student }) => {
             <Localizer localeKey="STUDENT_DETAILS_SUPERVISOR" />
           </Typography>
           <Typography variant="md">
-            {student.supervisor.user.firstName}
+            {student.supervisor.user.lastName}
           </Typography>
         </DetailsStyle>
         <DetailsStyle

@@ -5,7 +5,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import PopupState, { bindTrigger, bindMenu } from "material-ui-popup-state";
 import { userSelectors } from "../../store/user/selector";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { TRANSLATIONS } from "./constants";
+import { useNavigate } from "react-router-dom";
+import { userClear } from "../../store/user";
+import { tokenClear } from "../../store/user/token";
+import UseApi from "../../hooks/useApi";
+import { ACCOUNT_URL } from "../../constants/global";
 
 const StyledBox = styled(Box)(({ theme }) => ({
   position: "fixed",
@@ -34,6 +40,24 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 export const Header: React.FC = () => {
   const user = useSelector(userSelectors.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { apiCall } = UseApi();
+
+  const onSuccessLogout = () => {
+    dispatch(userClear());
+    dispatch(tokenClear());
+    navigate("/");
+  };
+
+  const logoutApiCall = () => {
+    apiCall({
+      url: ACCOUNT_URL.AUTH_LOGOUT,
+      method: "post",
+      successCallback: onSuccessLogout,
+    });
+  };
+
   return (
     <StyledBox>
       <PopupState variant="popover" popupId="demo-popup-menu">
@@ -53,9 +77,7 @@ export const Header: React.FC = () => {
               />
             </StyledButton>
             <Menu {...bindMenu(popupState)}>
-              <MenuItem onClick={popupState.close}>Profile</MenuItem>
-              <MenuItem onClick={popupState.close}>My account</MenuItem>
-              <MenuItem onClick={popupState.close}>Logout</MenuItem>
+              <MenuItem onClick={logoutApiCall}>{TRANSLATIONS.logout}</MenuItem>
             </Menu>
           </React.Fragment>
         )}

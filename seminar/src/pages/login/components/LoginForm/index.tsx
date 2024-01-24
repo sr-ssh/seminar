@@ -19,6 +19,7 @@ import { userSelectors } from "../../../../store/user/selector";
 import { useEffect, useState } from "react";
 import { setUserInfo } from "../../../../store/user";
 import { setToken } from "../../../../store/user/token";
+import { ACCOUNT_URL } from "../../../../constants/global";
 
 // email: "Negar@ut.ac.ir",
 // password: "Negar@1234",
@@ -71,7 +72,7 @@ const LoginForm = () => {
   const getUserData = () => {
     const query = {};
     apiCall({
-      url: "https://api.seminar.arkamond.com/api/account/user/me/",
+      url: ACCOUNT_URL.USER_ME,
       query,
       method: "get",
       successCallback: onGetUserDataSuccess,
@@ -100,7 +101,7 @@ const LoginForm = () => {
     };
 
     apiCall({
-      url: "https://api.seminar.arkamond.com/api/account/auth/login/",
+      url: ACCOUNT_URL.AUTH_LOGIN,
       query,
       method: "post",
       successCallback: onLoginSuccess,

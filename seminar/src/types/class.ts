@@ -1,3 +1,4 @@
+import { Area } from "./area";
 import { Thesis } from "./thesis";
 
 export interface Class {
@@ -8,4 +9,8 @@ export interface Class {
   teacher: number;
   registrationType: number;
   university: number;
+  area: Area;
+  membersCount: number;
+  title: string;
+  year: number;
 }

@@ -9,32 +9,37 @@ export const TeacherMenuItem: MenuItem[] = [
   { title: "درخواست‌ها", link: "" },
 ];
 
+export const TRANSLATIONS = {
+  pageTitle: (title: string, code: string) =>
+    `لیست دانشجویان کلاس ${title} با کد ${code}`,
+};
+
 export const columns: GridColDef[] = [
   {
-    field: "title",
-    headerName: convertLocale({ key: "CLASS_LIST_GRID_CLASS_NAME" }).text,
+    field: "name",
+    headerName: convertLocale({ key: "CLASS_DETAILS_STUDENT_NAME" }).text,
     flex: 1,
     align: "center",
     headerAlign: "center",
     headerClassName: "data-grid-header",
   },
   {
-    field: "membersCount",
+    field: "SID",
     flex: 0.6,
-    headerName: convertLocale({ key: "CLASS_LIST_GRID_MEMBERS" }).text,
+    headerName: convertLocale({ key: "CLASS_DETAILS_SID" }).text,
     align: "center",
     headerAlign: "center",
   },
   {
     field: "area",
     flex: 0.6,
-    headerName: convertLocale({ key: "CLASS_LIST_GRID_AREA" }).text,
+    headerName: convertLocale({ key: "CLASS_DETAILS_AREA" }).text,
     align: "center",
     headerAlign: "center",
   },
   {
-    field: "year",
-    headerName: convertLocale({ key: "CLASS_LIST_GRID_ENTRANCE_YEAR" }).text,
+    field: "entranceYear",
+    headerName: convertLocale({ key: "CLASS_DETAILS_ENTRANCE_YEAR" }).text,
     type: "number",
     flex: 0.5,
     align: "center",

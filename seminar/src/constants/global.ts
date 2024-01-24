@@ -4,14 +4,14 @@ export const BASE_URL = "https://api.seminar.arkamond.com/api";
 
 const ACCOUNT_BASE = BASE_URL + "/account";
 export const ACCOUNT_URL = {
-  AUTH_LOGIN: ACCOUNT_BASE + "/auth/login",
-  AUTH_LOGOUT: ACCOUNT_BASE + "/auth/logout",
+  AUTH_LOGIN: ACCOUNT_BASE + "/auth/login/",
+  AUTH_LOGOUT: ACCOUNT_BASE + "/auth/logout/",
   AUTH_REFRESH: ACCOUNT_BASE + "/auth/logout",
   AUTH_REGISTER: ACCOUNT_BASE + "/auth/register",
   AUTH_RESEND: ACCOUNT_BASE + "/auth/resend",
   AUTH_VERIFY: ACCOUNT_BASE + "/auth/verify_code",
   USER: ACCOUNT_BASE + "/user",
-  USER_ME: ACCOUNT_BASE + "/user/me",
+  USER_ME: ACCOUNT_BASE + "/user/me/",
   USER_AVATAR: ACCOUNT_BASE + "/user/set_avatar",
   STUDENTS: ACCOUNT_BASE + "/student",
   STUDENT_DETAILS: ACCOUNT_BASE + "/student",
@@ -90,6 +90,10 @@ export const initClass = {
   teacher: 0,
   registrationType: 0,
   university: 0,
+  area: initArea,
+  membersCount: 0,
+  title: "",
+  year: 0,
 };
 
 export const initStudent = {

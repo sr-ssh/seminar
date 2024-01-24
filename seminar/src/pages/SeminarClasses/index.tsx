@@ -19,6 +19,7 @@ import { classTransformer } from "../../utils/dataTransformers";
 import { UNIVERSITY_URL, initClass } from "../../constants/global";
 import { useNavigate } from "react-router-dom";
 import { Class } from "../../types/class";
+import { toFa } from "../../utils/numbers/numbers";
 
 const ClassLists = () => {
   const { apiCall, loading } = UseApi();
@@ -35,10 +36,10 @@ const ClassLists = () => {
   const [filteredClasses, setFilteredClasses] = useState([
     {
       id: 1,
-      className: "",
-      members: 0,
+      title: "",
+      membersCount: "",
       area: "",
-      entranceYear: "",
+      year: "",
     },
   ]);
 
@@ -77,10 +78,10 @@ const ClassLists = () => {
       const filterClasses = data.classes?.map((item) => {
         return {
           id: item.id,
-          className: item.code,
-          members: item.tags.length,
-          area: item.code,
-          entranceYear: item.code,
+          title: item.title,
+          membersCount: toFa(item.membersCount) || "",
+          area: item.area.title,
+          year: toFa(item.year.toString()) || "",
         };
       });
       setFilteredClasses(filterClasses);
