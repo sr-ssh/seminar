@@ -5,10 +5,9 @@ import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
 export const TeacherMenuItem: MenuItem[] = [
   { title: "دانشجویان", link: "/students" },
   { title: "کلاسها", link: "/classes" },
-  { title: "نمایندگی تحصیلات تکمیلی", link: "" },
+  { title: "نمایندگی تحصیلات تکمیلی", link: "/agent" },
   { title: "درخواست‌ها", link: "" },
 ];
-
 export const columns: GridColDef[] = [
   {
     field: "title",

@@ -9,10 +9,11 @@ export const TeacherMenuItem: MenuItem[] = [
   { title: "درخواست‌ها", link: "" },
 ];
 
+
 export const columns: GridColDef[] = [
   {
-    field: "firstName",
-    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_STUDENT_NAME" }).text,
+    field: "name",
+    headerName: convertLocale({ key: "CLASS_DETAILS_STUDENT_NAME" }).text,
     flex: 1,
     align: "center",
     headerAlign: "center",
@@ -21,20 +22,20 @@ export const columns: GridColDef[] = [
   {
     field: "SID",
     flex: 0.6,
-    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_SID" }).text,
+    headerName: convertLocale({ key: "CLASS_DETAILS_SID" }).text,
     align: "center",
     headerAlign: "center",
   },
   {
     field: "area",
     flex: 0.6,
-    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_AREA" }).text,
+    headerName: convertLocale({ key: "CLASS_DETAILS_AREA" }).text,
     align: "center",
     headerAlign: "center",
   },
   {
     field: "entranceYear",
-    headerName: convertLocale({ key: "STUDENTS_LIST_GRID_YEAR" }).text,
+    headerName: convertLocale({ key: "CLASS_DETAILS_ENTRANCE_YEAR" }).text,
     type: "number",
     flex: 0.5,
     align: "center",

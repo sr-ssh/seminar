@@ -96,6 +96,11 @@ export const globalLocales: GlobalLocalesType = {
   CLASS_DETAILS_AREA: "گرایش",
   CLASS_DETAILS_ENTRANCE_YEAR: "ورودی",
 
+  AGENT_LIST_TITLE_COLUMN: "عنوان دفاع",
+  AGENT_LIST_STUDENT_COLUMN: "دانشجو",
+  AGENT_LIST_SUPERVISOR_COLUMN: "استاد راهنما",
+  AGENT_LIST_DATE_COLUMN: "تاریخ",
+
   SELECT_SEMINAR_SUBMIT: "اعمال",
   SELECT_SEMINAR_SUPERVISOR_PLACEHOLDER: "انتخاب کنید",
   SELECT_SEMINAR_CLASS_PLACEHOLDER: "انتخاب کنید",

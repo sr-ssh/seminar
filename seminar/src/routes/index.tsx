@@ -12,6 +12,8 @@ import { useSelector } from "react-redux";
 import { userSelectors } from "../store/user/selector";
 import ClassLists from "../pages/SeminarClasses";
 import ClassDetails from "../pages/ClassDetails";
+import GraduateEducationAgency from "../pages/GraduateEducationAgency";
+import AgencyDetails from "../pages/AgencyDetails";
 
 export const Routing = () => {
   const userType = useSelector(userSelectors.user).type;
@@ -28,6 +30,8 @@ export const Routing = () => {
           <Route path="/students/:studentId" element={<StudentDetails />} />
           <Route path="classes" element={<ClassLists />} />
           <Route path="classes/:classId" element={<ClassDetails />} />
+          <Route path="agent" element={<GraduateEducationAgency />} />
+          <Route path="agent/:agentId" element={<AgencyDetails />} />
         </>
       )}
       {userType === 1 && (
