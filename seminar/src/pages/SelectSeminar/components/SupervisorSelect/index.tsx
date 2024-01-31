@@ -8,7 +8,11 @@ import { UNIVERSITY_URL } from "../../../../constants/global";
 import { useCallback, useState } from "react";
 import { selectProfessorTransformer } from "../../../../utils/dataTransformers";
 
-const SupervisorSelect = () => {
+const SupervisorSelect = ({
+  onSelect,
+}: {
+  onSelect: (value: string) => void;
+}) => {
   const [options, setOptions] = useState<{ id: string; user: string }[]>([]);
   const { apiCall, loading } = UseApi();
 
@@ -31,10 +35,12 @@ const SupervisorSelect = () => {
   );
 
   const changeHandler = (
-    _e: React.SyntheticEvent<Element, Event>,
+    e: React.SyntheticEvent<Element, Event>,
     value: string,
   ) => {
     callProfessors(value);
+    console.log(e.target);
+    onSelect(value);
   };
 
   return (

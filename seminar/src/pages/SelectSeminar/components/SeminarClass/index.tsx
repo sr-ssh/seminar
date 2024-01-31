@@ -5,7 +5,7 @@ import { UNIVERSITY_URL } from "../../../../constants/global";
 import UseApi from "../../../../hooks/useApi";
 import { selectSeminarClassTransformer } from "../../../../utils/dataTransformers";
 
-const SeminarClass = () => {
+const SeminarClass = ({ onSelect }: { onSelect: (value: string) => void }) => {
   const [options, setOptions] = useState([]);
   const { apiCall } = UseApi();
 
@@ -35,7 +35,7 @@ const SeminarClass = () => {
         labelLocalKey="SELECT_SEMINAR_CLASS_LABEL"
         placeHolder="SELECT_SEMINAR_CLASS_PLACEHOLDER"
         options={options}
-        onChange={(e) => console.log("classes", e.target.value)}
+        onChange={(e) => onSelect(e.target.value)}
       />
     </FormControl>
   );

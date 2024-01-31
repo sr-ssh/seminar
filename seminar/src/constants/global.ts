@@ -15,6 +15,7 @@ export const ACCOUNT_URL = {
   USER_AVATAR: ACCOUNT_BASE + "/user/set_avatar",
   STUDENTS: ACCOUNT_BASE + "/student",
   STUDENT_DETAILS: ACCOUNT_BASE + "/student",
+  STUDENT_UPDATE_ME: ACCOUNT_BASE + "/student/update_me/"
 };
 
 const CORE_BASE = BASE_URL + "/core";
