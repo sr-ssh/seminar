@@ -84,7 +84,7 @@ const Thesises = () => {
           id: item.id,
           title: item.title,
           student: item.student,
-          supervisor: item.supervisors[0]?.toString(),
+          supervisor: item.supervisors[0]?.user.lastName,
           createdAt: new Intl.DateTimeFormat("fa-IR").format(
             new Date(item.createdAt || Date.now()),
           ),
