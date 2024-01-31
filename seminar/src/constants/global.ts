@@ -121,6 +121,14 @@ export const initThesis = {
   tags: [],
 };
 
+export const initRegisteredThesis =
+{
+  "id": 0,
+  "thesis": initThesis,
+  "status": 0,
+}
+
+
 export const StudentMenuItem: MenuItem[] = [
   { title: "انتخاب استاد راهنما و کلاس سمینار", link: "/" },
   { title: "جلسات دفاع", link: "/thesis" },
