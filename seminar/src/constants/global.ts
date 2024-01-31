@@ -36,6 +36,7 @@ export const UNIVERSITY_URL = {
   SEMINAR_CLASS: UNIVERSITY_BASE + "/seminar_class",
   SEMINAR_CLASS_BY_CODE: UNIVERSITY_BASE + "/seminar_class?code=",
   THESIS: UNIVERSITY_BASE + "/thesis",
+  THESIS_REGISTER: UNIVERSITY_BASE + "/thesis/register",
   THESIS_SEARCH: UNIVERSITY_BASE + "/thesis?title__icontains=",
   UNIVERSITY: UNIVERSITY_BASE + "/university",
 };

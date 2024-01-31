@@ -183,7 +183,7 @@ const ThesisDetail = () => {
                   گیرد.
                 </Typography>
               </BoxStyles>
-              <ThesisForm />
+              <ThesisForm id={thesis.id} />
             </ContainerStyle>
           </Box>
         </SideBar>
