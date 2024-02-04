@@ -133,7 +133,7 @@ export const selectProfessorTransformer = (data: any) => {
 
 export const selectSeminarClassTransformer = (data: any) => {
   return {
-    id: data.id,
-    label: data.code,
+    id: data.code,
+    title: data.code,
   };
 };

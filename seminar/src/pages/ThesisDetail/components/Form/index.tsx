@@ -3,18 +3,39 @@ import { Box, Button, Typography } from "@mui/material";
 import { useRef, useState } from "react";
 import { Localizer } from "../../../../hooks/useGlobalLocales/Localizer";
 import ThesisModal from "../Modal";
+import UseApi from "../../../../hooks/useApi";
+import { UNIVERSITY_URL } from "../../../../constants/global";
+import { useSelector } from "react-redux";
+import { userSelectors } from "../../../../store/user/selector";
+import LoadingButton from "../../../../components/LoadingButton";
 
 const FileInput = styled.input({ display: "none" });
 
-const ThesisForm = () => {
+const ThesisForm = ({ id }: { id: number }) => {
   const [hasSignUp, setHasSignUp] = useState(false);
   const [file, setFile] = useState<File>();
   const [openModal, setOpenModal] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { apiCall } = UseApi();
+  const user = useSelector(userSelectors.user).id;
 
   const handleUpload = () => {
     // Trigger the file input click event
     fileInputRef.current?.click();
+  };
+
+  const registerThesis = async (data: string) => {
+    await new Promise((resolve) =>
+      apiCall({
+        url: UNIVERSITY_URL.THESIS_REGISTER + "/",
+        query: { student: user, thesis: id },
+        method: "post",
+        successCallback: () => {
+          setHasSignUp(true);
+          resolve("");
+        },
+      }),
+    );
   };
 
   return (
@@ -80,14 +101,16 @@ const ThesisForm = () => {
         </Box>
       ) : (
         <Box>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{ marginInlineEnd: "34px", width: 265 }}
-            onClick={() => setHasSignUp(true)}
+          <LoadingButton
+            buttonProps={{
+              variant: "contained",
+              size: "large",
+              sx: { marginInlineEnd: "34px", width: 265 },
+            }}
+            onSubmit={registerThesis}
           >
             <Localizer localeKey="THESIS_SIGNUP" />
-          </Button>
+          </LoadingButton>
           <Typography variant="lg" fontWeight={500}>
             <Localizer localeKey="THESIS_REMAIN_CAPACITY" />
           </Typography>

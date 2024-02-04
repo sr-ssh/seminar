@@ -25,6 +25,7 @@ const BasicSelect = ({
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
+    console.log(event.target);
     onChange(event as any);
   };
 

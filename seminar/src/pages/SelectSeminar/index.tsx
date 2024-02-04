@@ -1,12 +1,14 @@
 import { Container, styled } from "@mui/system";
 import { SideBar } from "../../components/SideBar";
-import { StudentMenuItem } from "../../constants/global";
+import { ACCOUNT_URL, StudentMenuItem } from "../../constants/global";
 import { Box, FormControl } from "@mui/material";
 import LoadingButton from "../../components/LoadingButton";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import BasicSelect from "../../components/Signup/Select";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import SupervisorSelect from "./components/SupervisorSelect";
+import SeminarClass from "./components/SeminarClass";
+import UseApi from "../../hooks/useApi";
 
 const BoxStyle = styled(Box)({
   display: "flex",
@@ -23,25 +25,36 @@ const ContainerStyle = styled(Container)(({ theme }) => ({
 }));
 
 const SelectSeminar = () => {
-  const { setValue } = useForm();
+  const { setValue, handleSubmit } = useForm();
+  const { apiCall } = UseApi();
+
+  const updateUser = (value: FieldValues) => {
+    console.log(value);
+
+    apiCall({
+      url: ACCOUNT_URL.STUDENT_UPDATE_ME,
+      query: value,
+      method: "put",
+      successCallback: ({ data }) => {
+        console.log(data);
+      },
+    });
+  };
 
   return (
     <SideBar menuItems={StudentMenuItem}>
       <ContainerStyle>
         <BoxStyle flexDirection={"column"} alignItems={"center"}>
           <BoxStyle width={600}>
-            <SupervisorSelect />
-            <FormControl variant="standard" sx={{ flex: 1 }}>
-              <BasicSelect
-                labelLocalKey="SELECT_SEMINAR_CLASS_LABEL"
-                placeHolder="SELECT_SEMINAR_CLASS_PLACEHOLDER"
-                options={[]}
-                onChange={(e) => setValue("classes", e.target.value)}
-              />
-            </FormControl>
+            <SupervisorSelect
+              onSelect={(value) => setValue("supervisor", value)}
+            />
+            <SeminarClass
+              onSelect={(value) => setValue("seminar_class", value)}
+            />
           </BoxStyle>
           <LoadingButton
-            onSubmit={() => console.log("first")}
+            onSubmit={handleSubmit(updateUser)}
             buttonProps={{ sx: { width: 288, borderRadius: 2 } }}
           >
             <Localizer localeKey="SELECT_SEMINAR_SUBMIT" />

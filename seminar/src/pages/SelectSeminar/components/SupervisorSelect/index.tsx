@@ -5,10 +5,14 @@ import { TextInput } from "../../../../components/TextInput";
 import { convertLocale } from "../../../../hooks/useGlobalLocales/useGlobalLocales";
 import UseApi from "../../../../hooks/useApi";
 import { UNIVERSITY_URL } from "../../../../constants/global";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { selectProfessorTransformer } from "../../../../utils/dataTransformers";
 
-const SupervisorSelect = () => {
+const SupervisorSelect = ({
+  onSelect,
+}: {
+  onSelect: (value: string) => void;
+}) => {
   const [options, setOptions] = useState<{ id: string; user: string }[]>([]);
   const { apiCall, loading } = UseApi();
 
@@ -31,16 +35,13 @@ const SupervisorSelect = () => {
   );
 
   const changeHandler = (
-    _e: React.SyntheticEvent<Element, Event>,
+    e: React.SyntheticEvent<Element, Event>,
     value: string,
   ) => {
     callProfessors(value);
+    console.log(e.target);
+    onSelect(value);
   };
-
-  useEffect(() => {
-    callProfessors("");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <FormControl variant="standard" sx={{ flex: 1 }}>
@@ -51,9 +52,10 @@ const SupervisorSelect = () => {
         disablePortal
         id="supervisor"
         loading={loading}
+        loadingText="در حال جستجو..."
+        noOptionsText=""
         onInputChange={changeHandler}
         options={options}
-        getOptionLabel={(option) => option.user}
         sx={{
           marginBlockStart: "6px",
           ".MuiOutlinedInput-root": { borderRadius: 2 },

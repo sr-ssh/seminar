@@ -15,13 +15,14 @@ import { getThesisTransformer } from "../../utils/dataTransformers";
 import {
   StudentMenuItem,
   UNIVERSITY_URL,
-  initThesis,
+  initRegisteredThesis,
 } from "../../constants/global";
 import { Localizer } from "../../hooks/useGlobalLocales/Localizer";
 import { TextInput } from "../../components/TextInput";
 import { convertLocale } from "../../hooks/useGlobalLocales/useGlobalLocales";
-import { Thesis } from "../../types/thesis";
 import { useNavigate } from "react-router";
+import { userSelectors } from "../../store/user/selector";
+import { useSelector } from "react-redux";
 
 const ContainerStyle = styled(Container)({
   textAlign: "start",
@@ -33,12 +34,13 @@ const ContainerStyle = styled(Container)({
 const RegisteredThesis = () => {
   const { apiCall, loading } = UseApi();
   const navigate = useNavigate();
+  const user = useSelector(userSelectors.user);
   const [data, setData] = useState<{
-    data: Thesis[];
+    data: any[];
     count?: number;
     numberOfPages?: number;
   }>({
-    data: [initThesis],
+    data: [initRegisteredThesis],
     count: 0,
     numberOfPages: 0,
   });
@@ -48,12 +50,20 @@ const RegisteredThesis = () => {
       title: "",
       student: "",
       supervisor: "",
-      createdAt: "",
     },
   ]);
 
   const onThesisSuccess = (res: any) => {
-    setData(getThesisTransformer(res.data));
+    const filterThesis = res.data.data.map((item: any) => {
+      return {
+        id: item.id,
+        title: item.thesis.title,
+        student: user.firstName + " " + user.lastName,
+        supervisor: item.thesis.supervisors[0]?.user.last_name,
+        status: item.status,
+      };
+    });
+    setFilteredThesis(filterThesis);
   };
 
   const search = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,24 +85,6 @@ const RegisteredThesis = () => {
     getThesisList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    if (data.data) {
-      console.log(data);
-      const filterThesis = data.data.map((item) => {
-        return {
-          id: item.id,
-          title: item.title,
-          student: item.student,
-          supervisor: item.supervisors[0]?.toString(),
-          createdAt: new Intl.DateTimeFormat("fa-IR").format(
-            new Date(item.createdAt || Date.now()),
-          ),
-        };
-      });
-      setFilteredThesis(filterThesis);
-    }
-  }, [data]);
 
   return (
     <>
